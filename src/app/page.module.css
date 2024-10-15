@@ -50,6 +50,9 @@
   display: flex;
   align-items: center;
   gap: 12px;
+
+  border: 1px solid gainsboro;
+  border-radius: 8px;
 }
 
 .check_wrapper > li > div > div {
@@ -59,14 +62,17 @@
 }
 
 .check_wrapper > li > div:first-of-type {
-  min-width: 140px;
+  padding: 8px 12px;
+
+  min-width: 160px;
   display: flex;
   align-items: center;
   gap: 8px;
   font-weight: bold;
+  background-color: #ddeeee;
 }
 
-.stop_button {
+/* .stop_button {
   border-color: transparent;
   background-color: red;
   color: wheat;
@@ -75,4 +81,4 @@
 .reset_button {
   border-color: transparent;
   background-color: greenyellow;
-}
+} */
