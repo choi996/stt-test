@@ -23,13 +23,13 @@ export default function Home() {
   const getIndex = useCallback(
     (type: string) => {
       const okIndex =
-        transcript.indexOf(`${type} 예스`) > 0
-          ? transcript.indexOf(`${type} 예스`)
-          : transcript.indexOf(`${type} yes`);
+        transcript.lastIndexOf(`${type} 예스`) > 0
+          ? transcript.lastIndexOf(`${type} 예스`)
+          : transcript.lastIndexOf(`${type} yes`);
       const noIndex =
-        transcript.indexOf(`${type} 노`) > 0
-          ? transcript.indexOf(`${type} 노`)
-          : transcript.indexOf(`${type} no`);
+        transcript.lastIndexOf(`${type} 노`) > 0
+          ? transcript.lastIndexOf(`${type} 노`)
+          : transcript.lastIndexOf(`${type} no`);
 
       return { okIndex, noIndex };
     },
