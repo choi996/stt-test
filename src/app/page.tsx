@@ -52,8 +52,13 @@ export default function Home() {
       if (tire.okIndex > 0 || tire.noIndex > 0) {
         setTireChecked(tire.okIndex > tire.noIndex ? "ok" : "no");
       }
+
+      if (transcript.includes("스탑") || transcript.includes("stop")) {
+        SpeechRecognition.stopListening();
+        resetTranscript();
+      }
     }
-  }, [transcript, getIndex]);
+  }, [transcript, getIndex, resetTranscript]);
 
   if (!browserSupportsSpeechRecognition) {
     return <span>Browser does support speech recognition.</span>;
