@@ -24,3 +24,16 @@
 .button_wrapper > :not(:last-of-type) {
   margin-right: 16px;
 }
+
+.check_wrapper {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.check_wrapper > div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
