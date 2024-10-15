@@ -33,36 +33,37 @@
 }
 
 .button_wrapper > :not(:last-of-type) {
-  margin-right: 16px;
+  margin-right: 8px;
 }
 
 .check_wrapper {
+  border-top: 1px solid beige;
+  border-bottom: 1px solid beige;
+  padding: 32px 0;
   margin-top: 40px;
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-.check_wrapper > div {
+.check_wrapper > li {
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
-.check_wrapper > div > div {
+.check_wrapper > li > div > div {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.check_wrapper > div > p {
-  min-width: 60px;
+.check_wrapper > li > div:first-of-type {
+  min-width: 140px;
   display: flex;
   align-items: center;
-}
-
-.check_wrapper > div > p > img {
-  margin-right: 4px;
+  gap: 8px;
+  font-weight: bold;
 }
 
 .stop_button {

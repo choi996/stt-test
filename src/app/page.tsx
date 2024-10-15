@@ -88,6 +88,27 @@ export default function Home() {
     setTireChecked(undefined);
   };
 
+  const list = [
+    {
+      type: "oil",
+      label: "엔진오일",
+      icon: OilIcon,
+      checked: engineoilChecked,
+    },
+    {
+      type: "battery",
+      label: "배터리",
+      icon: BatteryIcon,
+      checked: batterylChecked,
+    },
+    {
+      type: "tire",
+      label: "타이어",
+      icon: TireIcon,
+      checked: tireChecked,
+    },
+  ];
+
   return (
     <div className={styles.page}>
       <header className={styles.header}>안전진단 STT PoC</header>
@@ -120,80 +141,36 @@ export default function Home() {
           텍스트: {transcript}
         </p>
 
-        <div className={styles.check_wrapper}>
-          <div>
-            <p>
-              <Image src={OilIcon} alt="oil" />
-              엔진오일
-            </p>
-            <div>
-              <input
-                type="checkbox"
-                id="engineoil"
-                name="engineoil"
-                checked={engineoilChecked === "ok"}
-              />
-              <label htmlFor="engineoil">이상없음</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                id="engineoil"
-                name="engineoil"
-                checked={engineoilChecked === "no"}
-              />
-              <label htmlFor="engineoil">점검필요</label>
-            </div>
-          </div>
-          <div>
-            <p>
-              <Image src={BatteryIcon} alt="battery" />
-              배터리
-            </p>
-            <div>
-              <input
-                type="checkbox"
-                id="battery"
-                name="battery"
-                checked={batterylChecked === "ok"}
-              />
-              <label htmlFor="battery">이상없음</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                id="battery"
-                name="battery"
-                checked={batterylChecked === "no"}
-              />
-              <label htmlFor="battery">점검필요</label>
-            </div>
-          </div>
-          <div>
-            <p>
-              <Image src={TireIcon} alt="tire" />
-              타이어
-            </p>
-            <div>
-              <input
-                type="checkbox"
-                id="tire"
-                name="tire"
-                checked={tireChecked === "ok"}
-              />
-              <label htmlFor="tire">이상없음</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                id="tire"
-                name="tire"
-                checked={tireChecked === "no"}
-              />
-              <label htmlFor="tire">점검필요</label>
-            </div>
-          </div>
-        </div>
+        <ul className={styles.check_wrapper}>
+          {list.map(({ type, label, icon, checked }) => (
+            <li key={type}>
+              <div>
+                <Image src={icon} width={60} height={60} alt={type} />
+                {label}
+              </div>
+              <div>
+                <div>
+                  <input
+                    type="checkbox"
+                    id={type}
+                    name={type}
+                    checked={checked === "ok"}
+                  />
+                  <label htmlFor={type}>이상없음</label>
+                </div>
+                <div>
+                  <input
+                    type="checkbox"
+                    id={type}
+                    name={type}
+                    checked={checked === "no"}
+                  />
+                  <label htmlFor={type}>점검필요</label>
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );
