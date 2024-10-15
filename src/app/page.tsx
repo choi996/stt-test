@@ -4,7 +4,7 @@ import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
 import styles from "./page.module.css";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 type RadioTypes = "ok" | "no" | undefined;
 
@@ -20,46 +20,40 @@ export default function Home() {
     browserSupportsSpeechRecognition,
   } = useSpeechRecognition();
 
+  const getIndex = useCallback(
+    (type: string) => {
+      const okIndex =
+        transcript.indexOf(`${type} 예스`) > 0
+          ? transcript.indexOf(`${type} 예스`)
+          : transcript.indexOf(`${type} yes`);
+      const noIndex =
+        transcript.indexOf(`${type} 노`) > 0
+          ? transcript.indexOf(`${type} 노`)
+          : transcript.indexOf(`${type} no`);
+
+      return { okIndex, noIndex };
+    },
+    [transcript]
+  );
+
   useEffect(() => {
     if (transcript) {
-      if (
-        transcript.includes("엔진오일 예스") ||
-        transcript.includes("엔진오일 yes")
-      ) {
-        setEngineoilChecked("ok");
+      const engineoil = getIndex("엔진오일");
+      if (engineoil.okIndex > 0 || engineoil.noIndex > 0) {
+        setEngineoilChecked(
+          engineoil.okIndex > engineoil.noIndex ? "ok" : "no"
+        );
       }
-      if (
-        transcript.includes("엔진오일 노") ||
-        transcript.includes("엔진오일 no")
-      ) {
-        setEngineoilChecked("no");
+      const battery = getIndex("배터리");
+      if (battery.okIndex > 0 || battery.noIndex > 0) {
+        setBatteryChecked(battery.okIndex > battery.noIndex ? "ok" : "no");
       }
-      if (
-        transcript.includes("배터리 예스") ||
-        transcript.includes("배터리 yes")
-      ) {
-        setBatteryChecked("ok");
-      }
-      if (
-        transcript.includes("배터리 노") ||
-        transcript.includes("배터리 no")
-      ) {
-        setBatteryChecked("no");
-      }
-      if (
-        transcript.includes("타이어 예스") ||
-        transcript.includes("타이어 yes")
-      ) {
-        setTireChecked("ok");
-      }
-      if (
-        transcript.includes("타이어 노") ||
-        transcript.includes("타이어 no")
-      ) {
-        setTireChecked("no");
+      const tire = getIndex("타이어");
+      if (tire.okIndex > 0 || tire.noIndex > 0) {
+        setTireChecked(tire.okIndex > tire.noIndex ? "ok" : "no");
       }
     }
-  }, [transcript]);
+  }, [transcript, getIndex]);
 
   if (!browserSupportsSpeechRecognition) {
     return <span>Browser does support speech recognition.</span>;
