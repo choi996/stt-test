@@ -23,11 +23,11 @@ export default function Home() {
   const getIndex = useCallback(
     (type: string) => {
       const okIndex =
-        transcript.lastIndexOf(`${type} 예스`) > 0
+        transcript.lastIndexOf(`${type} 예스`) > -1
           ? transcript.lastIndexOf(`${type} 예스`)
           : transcript.lastIndexOf(`${type} yes`);
       const noIndex =
-        transcript.lastIndexOf(`${type} 노`) > 0
+        transcript.lastIndexOf(`${type} 노`) > -1
           ? transcript.lastIndexOf(`${type} 노`)
           : transcript.lastIndexOf(`${type} no`);
 
@@ -39,17 +39,17 @@ export default function Home() {
   useEffect(() => {
     if (transcript) {
       const engineoil = getIndex("엔진오일");
-      if (engineoil.okIndex > 0 || engineoil.noIndex > 0) {
+      if (engineoil.okIndex > -1 || engineoil.noIndex > -1) {
         setEngineoilChecked(
           engineoil.okIndex > engineoil.noIndex ? "ok" : "no"
         );
       }
       const battery = getIndex("배터리");
-      if (battery.okIndex > 0 || battery.noIndex > 0) {
+      if (battery.okIndex > -1 || battery.noIndex > -1) {
         setBatteryChecked(battery.okIndex > battery.noIndex ? "ok" : "no");
       }
       const tire = getIndex("타이어");
-      if (tire.okIndex > 0 || tire.noIndex > 0) {
+      if (tire.okIndex > -1 || tire.noIndex > -1) {
         setTireChecked(tire.okIndex > tire.noIndex ? "ok" : "no");
       }
 
