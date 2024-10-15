@@ -117,7 +117,7 @@ export default function Home() {
           </button>
         </div>
         <p style={{ marginTop: 40, whiteSpace: "pre-wrap" }}>
-          stt: {transcript}
+          텍스트: {transcript}
         </p>
 
         <div className={styles.check_wrapper}>
