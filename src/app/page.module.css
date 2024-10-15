@@ -1,8 +1,12 @@
 .page {
   width: 100%;
   min-height: 100svh;
-  padding: 24px;
   font-family: var(--font-geist-sans);
+}
+
+.header {
+  padding: 20px 24px;
+  border-bottom: 1px solid black;
 }
 
 .inner {
@@ -10,6 +14,13 @@
   margin: 0 auto;
   min-width: 320px;
   max-width: 780px;
+  padding: 24px;
+}
+
+.inner > span {
+  display: flex;
+  align-items: center;
+  height: 26px;
 }
 
 .inner > p {
@@ -35,9 +46,32 @@
 .check_wrapper > div {
   display: flex;
   align-items: center;
+  gap: 12px;
+}
+
+.check_wrapper > div > div {
+  display: flex;
+  align-items: center;
   gap: 8px;
 }
 
 .check_wrapper > div > p {
   min-width: 60px;
+  display: flex;
+  align-items: center;
+}
+
+.check_wrapper > div > p > img {
+  margin-right: 4px;
+}
+
+.stop_button {
+  border-color: transparent;
+  background-color: red;
+  color: wheat;
+}
+
+.reset_button {
+  border-color: transparent;
+  background-color: greenyellow;
 }

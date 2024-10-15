@@ -6,7 +6,16 @@ import SpeechRecognition, {
 import styles from "./page.module.css";
 import { useCallback, useEffect, useState } from "react";
 
+import TireIcon from "../assets/icon/Type=Tire.svg";
+import BatteryIcon from "../assets/icon/Type=Battery.svg";
+import OilIcon from "../assets/icon/Type=Oil.svg";
+import MicroPhoneOn from "../assets/icon/Type=On.svg";
+import Image from "next/image";
+
 type RadioTypes = "ok" | "no" | undefined;
+
+const okText = ["yes", "s", "S", "확인", "예스", "예쓰", "이상무"];
+const noText = ["no", "노", "점검", "무"];
 
 export default function Home() {
   const [engineoilChecked, setEngineoilChecked] = useState<RadioTypes>();
@@ -22,14 +31,22 @@ export default function Home() {
 
   const getIndex = useCallback(
     (type: string) => {
+      const removeBlank = transcript.replace(/ /g, "");
+      const findOkIndex = okText.findIndex(
+        (v) => removeBlank.lastIndexOf(`${type}${v}`) > -1
+      );
+      const findNoIndex = noText.findIndex(
+        (v) => removeBlank.lastIndexOf(`${type}${v}`) > -1
+      );
+
       const okIndex =
-        transcript.lastIndexOf(`${type} 예스`) > -1
-          ? transcript.lastIndexOf(`${type} 예스`)
-          : transcript.lastIndexOf(`${type} yes`);
+        findOkIndex > -1
+          ? removeBlank.lastIndexOf(`${type}${okText[findOkIndex]}`)
+          : -1;
       const noIndex =
-        transcript.lastIndexOf(`${type} 노`) > -1
-          ? transcript.lastIndexOf(`${type} 노`)
-          : transcript.lastIndexOf(`${type} no`);
+        findNoIndex > -1
+          ? removeBlank.lastIndexOf(`${type}${noText[findNoIndex]}`)
+          : -1;
 
       return { okIndex, noIndex };
     },
@@ -73,8 +90,12 @@ export default function Home() {
 
   return (
     <div className={styles.page}>
+      <header className={styles.header}>안전진단 STT PoC</header>
       <div className={styles.inner}>
-        <span>Microphone: {listening ? "on" : "off"}</span>
+        <span>
+          마이크: {listening ? "켜짐" : "꺼짐"}{" "}
+          {listening && <Image src={MicroPhoneOn} alt="on" />}{" "}
+        </span>
         <div className={styles.button_wrapper}>
           <button
             onClick={() =>
@@ -83,66 +104,94 @@ export default function Home() {
               })
             }
           >
-            Start
+            마이크 ON
           </button>
-          <button onClick={() => SpeechRecognition.stopListening()}>
-            Stop
+          <button
+            className={styles.stop_button}
+            onClick={() => SpeechRecognition.stopListening()}
+          >
+            마이크 OFF
           </button>
-          <button onClick={reset}>Reset</button>
+          <button className={styles.reset_button} onClick={reset}>
+            초기화
+          </button>
         </div>
-        <p style={{ marginTop: 40 }}>{transcript}</p>
+        <p style={{ marginTop: 40, whiteSpace: "pre-wrap" }}>
+          stt: {transcript}
+        </p>
 
         <div className={styles.check_wrapper}>
           <div>
-            <p>엔진오일</p>
-            <input
-              type="checkbox"
-              id="engineoil"
-              name="engineoil"
-              checked={engineoilChecked === "ok"}
-            />
-            <label htmlFor="engineoil">이상없음</label>
-            <input
-              type="checkbox"
-              id="engineoil"
-              name="engineoil"
-              checked={engineoilChecked === "no"}
-            />
-            <label htmlFor="engineoil">점검필요</label>
+            <p>
+              <Image src={OilIcon} alt="oil" />
+              엔진오일
+            </p>
+            <div>
+              <input
+                type="checkbox"
+                id="engineoil"
+                name="engineoil"
+                checked={engineoilChecked === "ok"}
+              />
+              <label htmlFor="engineoil">이상없음</label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="engineoil"
+                name="engineoil"
+                checked={engineoilChecked === "no"}
+              />
+              <label htmlFor="engineoil">점검필요</label>
+            </div>
           </div>
           <div>
-            <p>배터리</p>
-            <input
-              type="checkbox"
-              id="battery"
-              name="battery"
-              checked={batterylChecked === "ok"}
-            />
-            <label htmlFor="battery">이상없음</label>
-            <input
-              type="checkbox"
-              id="battery"
-              name="battery"
-              checked={batterylChecked === "no"}
-            />
-            <label htmlFor="battery">점검필요</label>
-          </div>{" "}
+            <p>
+              <Image src={BatteryIcon} alt="battery" />
+              배터리
+            </p>
+            <div>
+              <input
+                type="checkbox"
+                id="battery"
+                name="battery"
+                checked={batterylChecked === "ok"}
+              />
+              <label htmlFor="battery">이상없음</label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="battery"
+                name="battery"
+                checked={batterylChecked === "no"}
+              />
+              <label htmlFor="battery">점검필요</label>
+            </div>
+          </div>
           <div>
-            <p>타이어</p>
-            <input
-              type="checkbox"
-              id="tire"
-              name="tire"
-              checked={tireChecked === "ok"}
-            />
-            <label htmlFor="tire">이상없음</label>
-            <input
-              type="checkbox"
-              id="tire"
-              name="tire"
-              checked={tireChecked === "no"}
-            />
-            <label htmlFor="tire">점검필요</label>
+            <p>
+              <Image src={TireIcon} alt="tire" />
+              타이어
+            </p>
+            <div>
+              <input
+                type="checkbox"
+                id="tire"
+                name="tire"
+                checked={tireChecked === "ok"}
+              />
+              <label htmlFor="tire">이상없음</label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="tire"
+                name="tire"
+                checked={tireChecked === "no"}
+              />
+              <label htmlFor="tire">점검필요</label>
+            </div>
           </div>
         </div>
       </div>
