@@ -37,7 +37,7 @@ export default function Home() {
           </button>
           <button onClick={resetTranscript}>Reset</button>
         </div>
-        <p style={{ marginTop: 40 }}>tklndfks{transcript}</p>
+        <p style={{ marginTop: 40 }}>{transcript}</p>
       </div>
     </div>
   );
