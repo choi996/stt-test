@@ -6,10 +6,12 @@ import SpeechRecognition, {
 import styles from "./page.module.css";
 import { useEffect, useState } from "react";
 
+type RadioTypes = "ok" | "no" | undefined;
+
 export default function Home() {
-  const [engineoilChecked, setEngineoilChecked] = useState(false);
-  const [batterylChecked, setBatteryChecked] = useState(false);
-  const [tireChecked, setTireChecked] = useState(false);
+  const [engineoilChecked, setEngineoilChecked] = useState<RadioTypes>();
+  const [batterylChecked, setBatteryChecked] = useState<RadioTypes>();
+  const [tireChecked, setTireChecked] = useState<RadioTypes>();
 
   const {
     transcript,
@@ -20,20 +22,44 @@ export default function Home() {
 
   useEffect(() => {
     if (transcript) {
-      if (transcript.includes("엔진오일")) {
-        setEngineoilChecked(true);
-        resetTranscript();
+      if (
+        transcript.includes("엔진오일 예스") ||
+        transcript.includes("엔진오일 yes")
+      ) {
+        setEngineoilChecked("ok");
       }
-      if (transcript.includes("배터리")) {
-        setBatteryChecked(true);
-        resetTranscript();
+      if (
+        transcript.includes("엔진오일 노") ||
+        transcript.includes("엔진오일 no")
+      ) {
+        setEngineoilChecked("no");
       }
-      if (transcript.includes("타이어")) {
-        setTireChecked(true);
-        resetTranscript();
+      if (
+        transcript.includes("배터리 예스") ||
+        transcript.includes("배터리 yes")
+      ) {
+        setBatteryChecked("ok");
+      }
+      if (
+        transcript.includes("배터리 노") ||
+        transcript.includes("배터리 no")
+      ) {
+        setBatteryChecked("no");
+      }
+      if (
+        transcript.includes("타이어 예스") ||
+        transcript.includes("타이어 yes")
+      ) {
+        setTireChecked("ok");
+      }
+      if (
+        transcript.includes("타이어 노") ||
+        transcript.includes("타이어 no")
+      ) {
+        setTireChecked("no");
       }
     }
-  }, [transcript, resetTranscript]);
+  }, [transcript]);
 
   if (!browserSupportsSpeechRecognition) {
     return <span>Browser does support speech recognition.</span>;
@@ -41,9 +67,9 @@ export default function Home() {
 
   const reset = () => {
     resetTranscript();
-    setEngineoilChecked(false);
-    setBatteryChecked(false);
-    setTireChecked(false);
+    setEngineoilChecked(undefined);
+    setBatteryChecked(undefined);
+    setTireChecked(undefined);
   };
 
   return (
@@ -65,38 +91,59 @@ export default function Home() {
           </button>
           <button onClick={reset}>Reset</button>
         </div>
-        {/* <p style={{ marginTop: 40 }}>{transcript}</p> */}
+        <p style={{ marginTop: 40 }}>{transcript}</p>
 
         <div className={styles.check_wrapper}>
           <div>
+            <p>엔진오일</p>
             <input
               type="checkbox"
               id="engineoil"
               name="engineoil"
-              checked={engineoilChecked}
-              onClick={() => setEngineoilChecked((prev) => !prev)}
+              checked={engineoilChecked === "ok"}
             />
-            <label htmlFor="engineoil">엔진오일</label>
+            <label htmlFor="engineoil">이상없음</label>
+            <input
+              type="checkbox"
+              id="engineoil"
+              name="engineoil"
+              checked={engineoilChecked === "no"}
+            />
+            <label htmlFor="engineoil">점검필요</label>
           </div>
           <div>
+            <p>배터리</p>
             <input
               type="checkbox"
               id="battery"
               name="battery"
-              checked={batterylChecked}
-              onClick={() => setBatteryChecked((prev) => !prev)}
+              checked={batterylChecked === "ok"}
             />
-            <label htmlFor="battery">배터리</label>
-          </div>
+            <label htmlFor="battery">이상없음</label>
+            <input
+              type="checkbox"
+              id="battery"
+              name="battery"
+              checked={batterylChecked === "no"}
+            />
+            <label htmlFor="battery">점검필요</label>
+          </div>{" "}
           <div>
+            <p>타이어</p>
             <input
               type="checkbox"
               id="tire"
               name="tire"
-              checked={tireChecked}
-              onClick={() => setTireChecked((prev) => !prev)}
+              checked={tireChecked === "ok"}
             />
-            <label htmlFor="battery">타이어</label>
+            <label htmlFor="tire">이상없음</label>
+            <input
+              type="checkbox"
+              id="tire"
+              name="tire"
+              checked={tireChecked === "no"}
+            />
+            <label htmlFor="tire">점검필요</label>
           </div>
         </div>
       </div>

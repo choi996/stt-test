@@ -37,3 +37,7 @@
   align-items: center;
   gap: 8px;
 }
+
+.check_wrapper > div > p {
+  min-width: 60px;
+}
