@@ -1,0 +1,71 @@
+.container {
+  padding: 0 20px 8px;
+}
+
+.card_wrapper {
+  border: 1px solid var(--gray-scale-2);
+  border-radius: 8px;
+  display: flex;
+}
+
+.card_wrapper > textarea {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.card_wrapper > p {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  padding: 12px 20px;
+  min-width: 96px;
+  background-color: var(--gray-scale-11);
+  text-align: center;
+  font-weight: bold;
+}
+
+.card_wrapper > div {
+  width: 30%;
+  border-bottom-right-radius: 8px;
+  min-width: 116px;
+  border-left: 1px solid var(--gray-scale-2);
+  @media screen and (max-width: 460px) {
+    display: none;
+  }
+}
+
+.card_wrapper > div > p {
+  padding: 12px 20px;
+  text-align: center;
+  border-top-right-radius: 8px;
+  background-color: var(--gray-scale-11);
+  font-weight: bold;
+}
+.card_wrapper > div > div {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  padding: 12px;
+  color: var(--gray-scale-6);
+}
+
+.card_wrapper > div > div > input {
+  text-align: center;
+}
+
+.check_mamager {
+  display: flex;
+  align-items: center;
+  margin-top: 12px;
+  gap: 12px;
+  @media screen and (min-width: 460px) {
+    display: none;
+  }
+}
+
+.check_mamager > p {
+  color: var(--gray-scale-6);
+}
+
+.check_mamager > input {
+  width: fit-content;
+}

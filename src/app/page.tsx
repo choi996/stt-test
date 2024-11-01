@@ -9,8 +9,13 @@ import { useCallback, useEffect, useState } from "react";
 import TireIcon from "../assets/icon/Type=Tire.svg";
 import BatteryIcon from "../assets/icon/Type=Battery.svg";
 import OilIcon from "../assets/icon/Type=Oil.svg";
-import MicroPhoneOn from "../assets/icon/Type=On.svg";
-import Image from "next/image";
+import Header from "@/components/header";
+import Date from "@/components/date";
+import VehicleInfo from "@/components/vehicleInfo";
+import CustomerMemo from "@/components/customerMemo";
+import ExteriorCheck from "@/components/exteriorCheck";
+import BaseCheck from "@/components/baseCheck";
+import ManagerMemo from "@/components/managerMemo";
 
 type RadioTypes = "ok" | "no" | undefined;
 
@@ -18,16 +23,23 @@ const okText = ["yes", "s", "S", "확인", "예스", "예쓰", "이상무"];
 const noText = ["no", "노", "점검", "무"];
 
 export default function Home() {
+  const [isClient, setIsClient] = useState(false);
+
   const [engineoilChecked, setEngineoilChecked] = useState<RadioTypes>();
   const [batterylChecked, setBatteryChecked] = useState<RadioTypes>();
   const [tireChecked, setTireChecked] = useState<RadioTypes>();
 
+  const [text, setText] = useState("");
   const {
     transcript,
     listening,
     resetTranscript,
     browserSupportsSpeechRecognition,
   } = useSpeechRecognition();
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const getIndex = useCallback(
     (type: string) => {
@@ -77,8 +89,10 @@ export default function Home() {
     }
   }, [transcript, getIndex, resetTranscript]);
 
+  if (!isClient) return null;
+
   if (!browserSupportsSpeechRecognition) {
-    return <span>Browser does support speech recognition.</span>;
+    return <div>Browser does support speech recognition.</div>;
   }
 
   const reset = () => {
@@ -111,66 +125,51 @@ export default function Home() {
 
   return (
     <div className={styles.page}>
-      <header className={styles.header}>안전진단 STT PoC</header>
-      <div className={styles.inner}>
-        <span>
-          마이크: {listening ? "켜짐" : "꺼짐"}{" "}
-          {listening && <Image src={MicroPhoneOn} alt="on" />}{" "}
-        </span>
-        <div className={styles.button_wrapper}>
-          <button
-            onClick={() =>
-              SpeechRecognition.startListening({
-                continuous: true,
-              })
-            }
-          >
-            마이크 ON
-          </button>
-          <button
-            className={styles.stop_button}
-            onClick={() => SpeechRecognition.stopListening()}
-          >
-            마이크 OFF
-          </button>
-          <button className={styles.reset_button} onClick={reset}>
-            초기화
-          </button>
-        </div>
-        <p style={{ marginTop: 40, whiteSpace: "pre-wrap" }}>
-          텍스트: {transcript}
-        </p>
+      {/* <input value={text} onChange={(e) => setText(e.target.value)} /> */}
+      <Header />
+      <Date />
+      <VehicleInfo />
+      <CustomerMemo />
+      <ExteriorCheck text={text} />
+      <BaseCheck text={text} />
+      <ManagerMemo />
+      <ul className={styles.description_wrapper}>
+        <li>
+          상기 내용은 당사 매장에서 제공하는 점검 서비스로 점검 당시의 차량
+          상태에 대한 결과이며, 출고 이후 차량 성능을 보증하는 것은 아님을
+          알려드립니다.
+        </li>
+        <li>
+          해당 점검 서비스는 자동차관리법에 의거 시행하는 '정기점사'와
+          무관합니다. 향후 자동차 관리법에 따른 '정기검사'를 별도로 받으셔야
+          합니다.
+        </li>
+        <li>
+          점검 시 발견된 정밀진단이 요구 되거나, 수리가 필요한 항목은 고객님
+          동의 하에 진행되며 별도의 비용이 발생할 수 있습니다.
+        </li>
+      </ul>
+      <div className={styles.privacy}>
+        (선택) 개인정보 수집과 이용에 대한 동의
+        <br />
+        ◻︎ 모바일 자동차 점검 리포트 서비스 및 고객 맞춤형 정비 정보 제공의
+        목적으로 차량번호 및 휴대폰번호를 수집합니다. (고객 요청 시 즉시 삭제)
+      </div>
 
-        <ul className={styles.check_wrapper}>
-          {list.map(({ type, label, icon, checked }) => (
-            <li key={type}>
-              <div>
-                <Image src={icon} width={60} height={60} alt={type} />
-                {label}
-              </div>
-              <div>
-                <div>
-                  <input
-                    type="checkbox"
-                    id={type}
-                    name={type}
-                    checked={checked === "ok"}
-                  />
-                  <label htmlFor={type}>이상없음</label>
-                </div>
-                <div>
-                  <input
-                    type="checkbox"
-                    id={type}
-                    name={type}
-                    checked={checked === "no"}
-                  />
-                  <label htmlFor={type}>점검필요</label>
-                </div>
-              </div>
-            </li>
-          ))}
-        </ul>
+      <div className={styles.customer_signature}>
+        <div>
+          <p>
+            고객
+            <br />
+            서명
+          </p>
+          <input placeholder="위 내용에 동의합니다." />
+        </div>
+      </div>
+      <div className={styles.homepage}>
+        <a href="https://www.speedmate.com" target="_blank">
+          www.speedmate.com
+        </a>
       </div>
     </div>
   );
