@@ -5,34 +5,37 @@ import Rear from "../../assets/images/vehicle_rear.png";
 import Left from "../../assets/images/vehicle_left.png";
 import Right from "../../assets/images/vehicle_right.png";
 import Image from "next/image";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import {
   exteriorFrontCheck,
   exteriorLeftCheck,
   exteriorRearCheck,
   exteriorRightCheck,
 } from "@/app/utils";
+import { useSpeechRecognition } from "react-speech-recognition";
 
 interface Props {
   text: string;
 }
 
 export default function ExteriorCheck({ text }: Props) {
+  const { resetTranscript } = useSpeechRecognition();
+
+  const reset = useCallback(() => resetTranscript(), [resetTranscript]);
+
   useEffect(() => {
     if (text) {
-      const removeBlank = text.replace(/ /g, "");
-
-      if (removeBlank.includes("전면")) {
-        exteriorFrontCheck(removeBlank);
-      } else if (removeBlank.includes("후면")) {
-        exteriorRearCheck(removeBlank);
-      } else if (removeBlank.includes("왼쪽")) {
-        exteriorLeftCheck(removeBlank);
-      } else if (removeBlank.includes("오른쪽")) {
-        exteriorRightCheck(removeBlank);
+      if (text.includes("전면")) {
+        exteriorFrontCheck(text, reset);
+      } else if (text.includes("후면")) {
+        exteriorRearCheck(text, reset);
+      } else if (text.includes("왼쪽")) {
+        exteriorLeftCheck(text, reset);
+      } else if (text.includes("오른쪽")) {
+        exteriorRightCheck(text, reset);
       }
     }
-  }, [text]);
+  }, [text, reset]);
 
   return (
     <div className={styles.container}>

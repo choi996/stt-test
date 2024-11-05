@@ -1,14 +1,8 @@
 "use client";
 import "regenerator-runtime/runtime";
-import SpeechRecognition, {
-  useSpeechRecognition,
-} from "react-speech-recognition";
+import { useSpeechRecognition } from "react-speech-recognition";
 import styles from "./page.module.css";
-import { useCallback, useEffect, useState } from "react";
-
-import TireIcon from "../assets/icon/Type=Tire.svg";
-import BatteryIcon from "../assets/icon/Type=Battery.svg";
-import OilIcon from "../assets/icon/Type=Oil.svg";
+import { useEffect, useState } from "react";
 import Header from "@/components/header";
 import Date from "@/components/date";
 import VehicleInfo from "@/components/vehicleInfo";
@@ -16,122 +10,31 @@ import CustomerMemo from "@/components/customerMemo";
 import ExteriorCheck from "@/components/exteriorCheck";
 import BaseCheck from "@/components/baseCheck";
 import ManagerMemo from "@/components/managerMemo";
-
-type RadioTypes = "ok" | "no" | undefined;
-
-const okText = ["yes", "s", "S", "확인", "예스", "예쓰", "이상무"];
-const noText = ["no", "노", "점검", "무"];
+import Microphone from "@/components/microphone";
 
 export default function Home() {
   const [isClient, setIsClient] = useState(false);
+  const { transcript, listening } = useSpeechRecognition();
 
-  const [engineoilChecked, setEngineoilChecked] = useState<RadioTypes>();
-  const [batterylChecked, setBatteryChecked] = useState<RadioTypes>();
-  const [tireChecked, setTireChecked] = useState<RadioTypes>();
-
-  const [text, setText] = useState("");
-  const {
-    transcript,
-    listening,
-    resetTranscript,
-    browserSupportsSpeechRecognition,
-  } = useSpeechRecognition();
+  const removeBlank = transcript.replace(/ /g, "");
 
   useEffect(() => {
     setIsClient(true);
   }, []);
 
-  const getIndex = useCallback(
-    (type: string) => {
-      const removeBlank = transcript.replace(/ /g, "");
-      const findOkIndex = okText.findIndex(
-        (v) => removeBlank.lastIndexOf(`${type}${v}`) > -1
-      );
-      const findNoIndex = noText.findIndex(
-        (v) => removeBlank.lastIndexOf(`${type}${v}`) > -1
-      );
-
-      const okIndex =
-        findOkIndex > -1
-          ? removeBlank.lastIndexOf(`${type}${okText[findOkIndex]}`)
-          : -1;
-      const noIndex =
-        findNoIndex > -1
-          ? removeBlank.lastIndexOf(`${type}${noText[findNoIndex]}`)
-          : -1;
-
-      return { okIndex, noIndex };
-    },
-    [transcript]
-  );
-
-  useEffect(() => {
-    if (transcript) {
-      const engineoil = getIndex("엔진오일");
-      if (engineoil.okIndex > -1 || engineoil.noIndex > -1) {
-        setEngineoilChecked(
-          engineoil.okIndex > engineoil.noIndex ? "ok" : "no"
-        );
-      }
-      const battery = getIndex("배터리");
-      if (battery.okIndex > -1 || battery.noIndex > -1) {
-        setBatteryChecked(battery.okIndex > battery.noIndex ? "ok" : "no");
-      }
-      const tire = getIndex("타이어");
-      if (tire.okIndex > -1 || tire.noIndex > -1) {
-        setTireChecked(tire.okIndex > tire.noIndex ? "ok" : "no");
-      }
-
-      if (transcript.includes("스탑") || transcript.includes("stop")) {
-        SpeechRecognition.stopListening();
-        resetTranscript();
-      }
-    }
-  }, [transcript, getIndex, resetTranscript]);
-
   if (!isClient) return null;
-
-  if (!browserSupportsSpeechRecognition) {
-    return <div>Browser does support speech recognition.</div>;
-  }
-
-  const reset = () => {
-    resetTranscript();
-    setEngineoilChecked(undefined);
-    setBatteryChecked(undefined);
-    setTireChecked(undefined);
-  };
-
-  const list = [
-    {
-      type: "oil",
-      label: "엔진오일",
-      icon: OilIcon,
-      checked: engineoilChecked,
-    },
-    {
-      type: "battery",
-      label: "배터리",
-      icon: BatteryIcon,
-      checked: batterylChecked,
-    },
-    {
-      type: "tire",
-      label: "타이어",
-      icon: TireIcon,
-      checked: tireChecked,
-    },
-  ];
 
   return (
     <div className={styles.page}>
-      {/* <input value={text} onChange={(e) => setText(e.target.value)} /> */}
       <Header />
       <Date />
+      {!!transcript && (
+        <div className={styles.transcript}>Script: {transcript}</div>
+      )}
       <VehicleInfo />
       <CustomerMemo />
-      <ExteriorCheck text={text} />
-      <BaseCheck text={text} />
+      <ExteriorCheck text={removeBlank} />
+      <BaseCheck text={removeBlank} />
       <ManagerMemo />
       <ul className={styles.description_wrapper}>
         <li>
@@ -140,9 +43,9 @@ export default function Home() {
           알려드립니다.
         </li>
         <li>
-          해당 점검 서비스는 자동차관리법에 의거 시행하는 '정기점사'와
+          {`해당 점검 서비스는 자동차관리법에 의거 시행하는 '정기점사'와
           무관합니다. 향후 자동차 관리법에 따른 '정기검사'를 별도로 받으셔야
-          합니다.
+          합니다.`}
         </li>
         <li>
           점검 시 발견된 정밀진단이 요구 되거나, 수리가 필요한 항목은 고객님
@@ -171,6 +74,7 @@ export default function Home() {
           www.speedmate.com
         </a>
       </div>
+      <Microphone status={listening ? "on" : "off"} />
     </div>
   );
 }

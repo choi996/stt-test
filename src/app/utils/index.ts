@@ -4,7 +4,8 @@ const front = ["프론트", "전방", "앞", "앞쪽"];
 const rear = ["뒤", "뒷쪽", "뒤쪽", "후방", "리어", "뒷"];
 const lamp = ["라이트", "등", "테일램프", "램프", "헤드램프"];
 
-export const exteriorFrontCheck = (text: string) => {
+export const exteriorFrontCheck = (text: string, callback: () => void) => {
+  let isCatch = false;
   const frontSide = document.getElementById("front_side") as HTMLLIElement;
   const div = document.createElement("div");
 
@@ -12,6 +13,7 @@ export const exteriorFrontCheck = (text: string) => {
   div.style.border = "1px solid red";
 
   if (text.includes("상부") || text.includes("상판")) {
+    isCatch = true;
     const frontTop = document.getElementById("front_top");
     if (text.includes("취소") && !!frontTop) {
       frontTop.remove();
@@ -25,6 +27,7 @@ export const exteriorFrontCheck = (text: string) => {
     div.id = "front_top";
     frontSide.appendChild(div);
   } else if (text.includes("하부")) {
+    isCatch = true;
     const frontBottom = document.getElementById("front_bottom");
     if (text.includes("취소") && !!frontBottom) {
       frontBottom.remove();
@@ -39,6 +42,7 @@ export const exteriorFrontCheck = (text: string) => {
 
     frontSide.appendChild(div);
   } else if (bonnet.some((v) => text.includes(v))) {
+    isCatch = true;
     const frontbonnet = document.getElementById("front_bonnet");
     if (text.includes("취소") && !!frontbonnet) {
       frontbonnet.remove();
@@ -53,13 +57,16 @@ export const exteriorFrontCheck = (text: string) => {
 
     frontSide.appendChild(div);
   } else if (text.includes("오른쪽")) {
-    const frontRightHeadlamp = document.getElementById("front_right_headlamp");
-    if (text.includes("취소") && !!frontRightHeadlamp) {
-      frontRightHeadlamp.remove();
-    }
-    if (!!frontRightHeadlamp) return;
-
     if (lamp.some((v) => text.includes(v))) {
+      isCatch = true;
+      const frontRightHeadlamp = document.getElementById(
+        "front_right_headlamp"
+      );
+      if (text.includes("취소") && !!frontRightHeadlamp) {
+        frontRightHeadlamp.remove();
+      }
+      if (!!frontRightHeadlamp) return;
+
       div.style.top = "30px";
       div.style.left = "10px";
       div.style.height = "20px";
@@ -68,6 +75,7 @@ export const exteriorFrontCheck = (text: string) => {
       div.id = "front_right_headlamp";
       frontSide.appendChild(div);
     } else if (sideMirror.some((v) => text.includes(v))) {
+      isCatch = true;
       const rightSideMirror = document.getElementById("front_right_mirror");
       if (text.includes("취소") && !!rightSideMirror) {
         rightSideMirror.remove();
@@ -83,13 +91,13 @@ export const exteriorFrontCheck = (text: string) => {
       frontSide.appendChild(div);
     }
   } else if (text.includes("왼쪽")) {
-    const frontRightHeadlamp = document.getElementById("front_left_headlamp");
-    if (text.includes("취소") && !!frontRightHeadlamp) {
-      frontRightHeadlamp.remove();
-    }
-    if (!!frontRightHeadlamp) return;
-
     if (lamp.some((v) => text.includes(v))) {
+      isCatch = true;
+      const frontRightHeadlamp = document.getElementById("front_left_headlamp");
+      if (text.includes("취소") && !!frontRightHeadlamp) {
+        frontRightHeadlamp.remove();
+      }
+      if (!!frontRightHeadlamp) return;
       div.style.top = "30px";
       div.style.right = "10px";
       div.style.height = "20px";
@@ -98,6 +106,7 @@ export const exteriorFrontCheck = (text: string) => {
       div.id = "front_left_headlamp";
       frontSide.appendChild(div);
     } else if (sideMirror.some((v) => text.includes(v))) {
+      isCatch = true;
       const rightSideMirror = document.getElementById("front_left_mirror");
       if (text.includes("취소") && !!rightSideMirror) {
         rightSideMirror.remove();
@@ -113,9 +122,14 @@ export const exteriorFrontCheck = (text: string) => {
       frontSide.appendChild(div);
     }
   }
+
+  if (isCatch) {
+    callback();
+  }
 };
 
-export const exteriorLeftCheck = (text: string) => {
+export const exteriorLeftCheck = (text: string, callback: () => void) => {
+  let isCatch = false;
   const leftSide = document.getElementById("left_side") as HTMLLIElement;
   const div = document.createElement("div");
 
@@ -124,6 +138,7 @@ export const exteriorLeftCheck = (text: string) => {
 
   if (front.some((v) => text.includes(v))) {
     if (text.includes("타이어")) {
+      isCatch = true;
       const leftFrontTire = document.getElementById("left_front_tire");
       if (text.includes("취소") && !!leftFrontTire) {
         leftFrontTire.remove();
@@ -142,6 +157,7 @@ export const exteriorLeftCheck = (text: string) => {
       text.includes("문짝") ||
       text.includes("도어")
     ) {
+      isCatch = true;
       const leftFrontDoor = document.getElementById("left_front_door");
       if (text.includes("취소") && !!leftFrontDoor) {
         leftFrontDoor.remove();
@@ -158,6 +174,7 @@ export const exteriorLeftCheck = (text: string) => {
     }
   } else if (rear.some((v) => text.includes(v))) {
     if (text.includes("타이어")) {
+      isCatch = true;
       const leftRearTire = document.getElementById("left_rear_tire");
       if (text.includes("취소") && !!leftRearTire) {
         leftRearTire.remove();
@@ -176,6 +193,7 @@ export const exteriorLeftCheck = (text: string) => {
       text.includes("문짝") ||
       text.includes("도어")
     ) {
+      isCatch = true;
       const leftRearDoor = document.getElementById("left_rear_door");
       if (text.includes("취소") && !!leftRearDoor) {
         leftRearDoor.remove();
@@ -191,15 +209,20 @@ export const exteriorLeftCheck = (text: string) => {
       leftSide.appendChild(div);
     }
   }
+  if (isCatch) {
+    callback();
+  }
 };
 
-export const exteriorRearCheck = (text: string) => {
+export const exteriorRearCheck = (text: string, callback: () => void) => {
+  let isCatch = false;
   const rearSide = document.getElementById("rear_side") as HTMLLIElement;
   const div = document.createElement("div");
 
   div.style.position = "absolute";
   div.style.border = "1px solid red";
   if (text.includes("상부") || text.includes("상판")) {
+    isCatch = true;
     const rearTop = document.getElementById("rear_top");
     if (text.includes("취소") && !!rearTop) {
       rearTop.remove();
@@ -227,6 +250,7 @@ export const exteriorRearCheck = (text: string) => {
 
     rearSide.appendChild(div);
   } else if (text.includes("트렁크")) {
+    isCatch = true;
     const rearTrunk = document.getElementById("rear_trunk");
     if (text.includes("취소") && !!rearTrunk) {
       rearTrunk.remove();
@@ -241,12 +265,13 @@ export const exteriorRearCheck = (text: string) => {
 
     rearSide.appendChild(div);
   } else if (text.includes("오른쪽")) {
-    const rearRightTaillamp = document.getElementById("rear_right_taillamp");
-    if (text.includes("취소") && !!rearRightTaillamp) {
-      rearRightTaillamp.remove();
-    }
-    if (!!rearRightTaillamp) return;
     if (lamp.some((v) => text.includes(v))) {
+      isCatch = true;
+      const rearRightTaillamp = document.getElementById("rear_right_taillamp");
+      if (text.includes("취소") && !!rearRightTaillamp) {
+        rearRightTaillamp.remove();
+      }
+      if (!!rearRightTaillamp) return;
       div.style.top = "30px";
       div.style.right = "10px";
       div.style.height = "20px";
@@ -256,13 +281,13 @@ export const exteriorRearCheck = (text: string) => {
       rearSide.appendChild(div);
     }
   } else if (text.includes("왼쪽")) {
-    const rearLeftTailLamp = document.getElementById("rear_left_taillamp");
-    if (text.includes("취소") && !!rearLeftTailLamp) {
-      rearLeftTailLamp.remove();
-    }
-    if (!!rearLeftTailLamp) return;
-
     if (lamp.some((v) => text.includes(v))) {
+      isCatch = true;
+      const rearLeftTailLamp = document.getElementById("rear_left_taillamp");
+      if (text.includes("취소") && !!rearLeftTailLamp) {
+        rearLeftTailLamp.remove();
+      }
+      if (!!rearLeftTailLamp) return;
       div.style.top = "30px";
       div.style.left = "10px";
       div.style.height = "20px";
@@ -272,9 +297,14 @@ export const exteriorRearCheck = (text: string) => {
       rearSide.appendChild(div);
     }
   }
+
+  if (isCatch) {
+    callback();
+  }
 };
 
-export const exteriorRightCheck = (text: string) => {
+export const exteriorRightCheck = (text: string, callback: () => void) => {
+  let isCatch = false;
   const rightSide = document.getElementById("right_side") as HTMLLIElement;
   const div = document.createElement("div");
 
@@ -283,6 +313,7 @@ export const exteriorRightCheck = (text: string) => {
 
   if (front.some((v) => text.includes(v))) {
     if (text.includes("타이어")) {
+      isCatch = true;
       const rightFrontTire = document.getElementById("right_front_tire");
       if (text.includes("취소") && !!rightFrontTire) {
         rightFrontTire.remove();
@@ -301,6 +332,7 @@ export const exteriorRightCheck = (text: string) => {
       text.includes("문짝") ||
       text.includes("도어")
     ) {
+      isCatch = true;
       const rightFrontDoor = document.getElementById("right_front_door");
       if (text.includes("취소") && !!rightFrontDoor) {
         rightFrontDoor.remove();
@@ -317,6 +349,7 @@ export const exteriorRightCheck = (text: string) => {
     }
   } else if (rear.some((v) => text.includes(v))) {
     if (text.includes("타이어")) {
+      isCatch = true;
       const rightRearTire = document.getElementById("right_rear_tire");
       if (text.includes("취소") && !!rightRearTire) {
         rightRearTire.remove();
@@ -335,6 +368,7 @@ export const exteriorRightCheck = (text: string) => {
       text.includes("문짝") ||
       text.includes("도어")
     ) {
+      isCatch = true;
       const rightRearDoor = document.getElementById("right_rear_door");
       if (text.includes("취소") && !!rightRearDoor) {
         rightRearDoor.remove();
@@ -349,5 +383,9 @@ export const exteriorRightCheck = (text: string) => {
       div.id = "right_rear_door";
       rightSide.appendChild(div);
     }
+  }
+
+  if (isCatch) {
+    callback();
   }
 };
