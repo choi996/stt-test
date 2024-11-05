@@ -3,6 +3,11 @@ import styles from "./baseCheck.module.css";
 import Front from "../../assets/images/vehicle_front.png";
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
+import {
+  leakTextList,
+  nonpassTextList,
+  passTextList,
+} from "@/constants/strings";
 
 type CheckedTypes = "pass" | "nonpass" | "leak" | undefined;
 
@@ -29,33 +34,6 @@ export default function BaseCheck({ text, reset }: Props) {
   const [evCable, setEvCable] = useState<CheckedTypes>();
   const [evPlug, setEvPlug] = useState<CheckedTypes>();
   const [evGearOil, setEvGearOil] = useState<CheckedTypes>();
-
-  const passTextList = [
-    "pass",
-    "패스",
-    "패쓰",
-    "확인",
-    "예스",
-    "s",
-    "S",
-    "이상무",
-    "yes",
-  ];
-  const nonpassTextList = [
-    "nonpass",
-    "논패스",
-    "눈패스",
-    "논패쓰",
-    "주의",
-    "교체",
-    "교체요",
-    "교체필요",
-    "no",
-    "노",
-    "는",
-  ];
-
-  const leakTextList = ["leak", "누유", "누수"];
 
   const getStatus = useCallback(
     (): CheckedTypes => {
@@ -151,6 +129,7 @@ export default function BaseCheck({ text, reset }: Props) {
     {
       title: "엔진오일",
       status: engineOil,
+      setStatus: setEngineOil,
       checkList: [
         {
           label: "양호",
@@ -169,6 +148,7 @@ export default function BaseCheck({ text, reset }: Props) {
     {
       title: "브레이크 오일",
       status: breakOil,
+      setStatus: setBreakOil,
       checkList: [
         {
           label: "양호",
@@ -187,6 +167,7 @@ export default function BaseCheck({ text, reset }: Props) {
     {
       title: "스티어링\n시스템",
       status: steering,
+      setStatus: setSteering,
       checkList: [
         {
           label: "양호",
@@ -205,6 +186,7 @@ export default function BaseCheck({ text, reset }: Props) {
     {
       title: "냉각수",
       status: coolant,
+      setStatus: setCoolant,
       checkList: [
         {
           label: "양호",
@@ -223,6 +205,7 @@ export default function BaseCheck({ text, reset }: Props) {
     {
       title: "외부벨트/텐셔너",
       status: tensioner,
+      setStatus: setTensioner,
       checkList: [
         {
           label: "양호",
@@ -237,6 +220,7 @@ export default function BaseCheck({ text, reset }: Props) {
     {
       title: "배터리",
       status: battery,
+      setStatus: setBattery,
       checkList: [
         {
           label: "양호",
@@ -251,6 +235,7 @@ export default function BaseCheck({ text, reset }: Props) {
     {
       title: "와이퍼",
       status: wiper,
+      setStatus: setWiper,
       checkList: [
         {
           label: "양호",
@@ -265,6 +250,7 @@ export default function BaseCheck({ text, reset }: Props) {
     {
       title: "계기판\n경고등 상태",
       status: dashboard,
+      setStatus: setDashboard,
       checkList: [
         {
           label: "양호",
@@ -279,6 +265,7 @@ export default function BaseCheck({ text, reset }: Props) {
     {
       title: "공조장치 필터",
       status: airfilter,
+      setStatus: setAirfilter,
       checkList: [
         {
           label: "양호",
@@ -293,6 +280,7 @@ export default function BaseCheck({ text, reset }: Props) {
     {
       title: "타이어 공기압\n마모도",
       status: tirePressure,
+      setStatus: setTirePressure,
       checkList: [
         {
           label: "양호",
@@ -307,6 +295,7 @@ export default function BaseCheck({ text, reset }: Props) {
     {
       title: "브레이크 패드\n/ 디스크",
       status: breakpad,
+      setStatus: setBreakpad,
       checkList: [
         {
           label: "양호",
@@ -321,6 +310,7 @@ export default function BaseCheck({ text, reset }: Props) {
     {
       title: "서스펜션",
       status: suspension,
+      setStatus: setSuspension,
       checkList: [
         {
           label: "양호",
@@ -335,6 +325,7 @@ export default function BaseCheck({ text, reset }: Props) {
     {
       title: "드라이브 샤프트",
       status: driveShaft,
+      setStatus: setDriveShaft,
       checkList: [
         {
           label: "양호",
@@ -349,6 +340,7 @@ export default function BaseCheck({ text, reset }: Props) {
     {
       title: "외부 등화 장치",
       status: exLamp,
+      setStatus: setExLamp,
       checkList: [
         {
           label: "양호",
@@ -366,6 +358,7 @@ export default function BaseCheck({ text, reset }: Props) {
     {
       title: "고전압 케이블",
       status: evCable,
+      setStatus: setEvCable,
       checkList: [
         {
           label: "양호",
@@ -380,6 +373,7 @@ export default function BaseCheck({ text, reset }: Props) {
     {
       title: "충전플러그",
       status: evPlug,
+      setStatus: setEvPlug,
       checkList: [
         {
           label: "양호",
@@ -394,6 +388,7 @@ export default function BaseCheck({ text, reset }: Props) {
     {
       title: "감속기 오일",
       status: evGearOil,
+      setStatus: setEvGearOil,
       checkList: [
         {
           label: "양호",
@@ -429,7 +424,9 @@ export default function BaseCheck({ text, reset }: Props) {
                           id={type}
                           name={type}
                           checked={v.value === item.status}
-                          readOnly
+                          onChange={() =>
+                            item.setStatus(v.value as CheckedTypes)
+                          }
                         />
                         <label htmlFor={type}>{v.label}</label>
                       </div>
@@ -460,7 +457,9 @@ export default function BaseCheck({ text, reset }: Props) {
                               id={type}
                               name={type}
                               checked={v.value === item.status}
-                              readOnly
+                              onChange={() =>
+                                item.setStatus(v.value as CheckedTypes)
+                              }
                             />
                             <label htmlFor={type}>{v.label}</label>
                           </div>

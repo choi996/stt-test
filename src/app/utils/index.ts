@@ -231,7 +231,8 @@ export const exteriorRearCheck = (text: string, callback: () => void) => {
     div.style.borderRadius = "8px";
     div.id = "rear_top";
     rearSide.appendChild(div);
-  } else if (text.includes("하부")) {
+  } else if (text.includes("하부") || text.includes("하고")) {
+    isCatch = true;
     const rearBottom = document.getElementById("rear_bottom");
     if (text.includes("취소") && !!rearBottom) {
       rearBottom.remove();

@@ -62,6 +62,10 @@
   }
 }
 
+.check_mamager > span {
+  white-space: nowrap;
+}
+
 .check_mamager > p {
   color: var(--gray-scale-6);
 }
