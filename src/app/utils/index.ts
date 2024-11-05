@@ -1,8 +1,4 @@
-const sideMirror = ["사이드", "사이드미러", "백미러", "미러"];
-const bonnet = ["보닛", "본네트", "본넷", "본냇", "보네트"];
-const front = ["프론트", "전방", "앞", "앞쪽"];
-const rear = ["뒤", "뒷쪽", "뒤쪽", "후방", "리어", "뒷"];
-const lamp = ["라이트", "등", "테일램프", "램프", "헤드램프"];
+import { bonnet, front, lamp, rear, sideMirror } from "@/constants/strings";
 
 export const exteriorFrontCheck = (text: string, callback: () => void) => {
   let isCatch = false;

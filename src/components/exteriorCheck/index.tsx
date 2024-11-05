@@ -12,6 +12,7 @@ import {
   exteriorRearCheck,
   exteriorRightCheck,
 } from "@/app/utils";
+import { bonnet } from "@/constants/strings";
 
 interface Props {
   text: string;
@@ -21,9 +22,9 @@ interface Props {
 export default function ExteriorCheck({ text, reset }: Props) {
   useEffect(() => {
     if (text) {
-      if (text.includes("전면")) {
+      if (text.includes("전면") || bonnet.some((v) => text.includes(v))) {
         exteriorFrontCheck(text, reset);
-      } else if (text.includes("후면")) {
+      } else if (text.includes("후면") || text.includes("트렁크")) {
         exteriorRearCheck(text, reset);
       } else if (text.includes("왼쪽")) {
         exteriorLeftCheck(text, reset);
