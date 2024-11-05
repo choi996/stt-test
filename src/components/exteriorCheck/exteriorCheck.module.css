@@ -7,7 +7,7 @@
   border-radius: 8px;
 }
 
-.card_wrapper > p {
+.card_wrapper > div {
   text-align: center;
   background-color: var(--gray-scale-11);
   border-top-left-radius: 8px;

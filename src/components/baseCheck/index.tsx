@@ -3,17 +3,15 @@ import styles from "./baseCheck.module.css";
 import Front from "../../assets/images/vehicle_front.png";
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
-import { useSpeechRecognition } from "react-speech-recognition";
 
 type CheckedTypes = "pass" | "nonpass" | "leak" | undefined;
 
 interface Props {
   text: string;
+  reset: () => void;
 }
 
-export default function BaseCheck({ text }: Props) {
-  const { resetTranscript } = useSpeechRecognition();
-
+export default function BaseCheck({ text, reset }: Props) {
   const [engineOil, setEngineOil] = useState<CheckedTypes>();
   const [breakOil, setBreakOil] = useState<CheckedTypes>();
   const [steering, setSteering] = useState<CheckedTypes>();
@@ -57,11 +55,11 @@ export default function BaseCheck({ text }: Props) {
     "는",
   ];
 
-  const leakTextList = ["leak", "누유", "누수", ""];
+  const leakTextList = ["leak", "누유", "누수"];
 
   const getStatus = useCallback(
     (): CheckedTypes => {
-      const passIndex = passTextList.findIndex((v) => text.indexOf(v) > -1);
+      const passIndex = passTextList.findIndex((v) => text.includes(v));
 
       if (passIndex > -1) {
         return "pass";
@@ -72,7 +70,7 @@ export default function BaseCheck({ text }: Props) {
         return "nonpass";
       }
 
-      const leakIndex = leakTextList.findIndex((v) => text.indexOf(v) > -1);
+      const leakIndex = leakTextList.findIndex((v) => text.includes(v));
       if (leakIndex > -1) {
         return "leak";
       }
@@ -143,13 +141,11 @@ export default function BaseCheck({ text }: Props) {
     }
     if (isCatch) {
       setTimeout(() => {
-        resetTranscript();
+        reset();
       }, 1000);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [text]);
-
-  console.log("text", text);
 
   const baseCheckList = [
     {
@@ -414,7 +410,7 @@ export default function BaseCheck({ text }: Props) {
   return (
     <div className={styles.container}>
       <div className={styles.card_wrapper}>
-        <p>기본 점검</p>
+        <div>기본 점검</div>
         <ul>
           {baseCheckList.map((item) => (
             <li className={styles.check_unit_card} key={item.title}>

@@ -5,24 +5,20 @@ import Rear from "../../assets/images/vehicle_rear.png";
 import Left from "../../assets/images/vehicle_left.png";
 import Right from "../../assets/images/vehicle_right.png";
 import Image from "next/image";
-import { useCallback, useEffect } from "react";
+import { useEffect } from "react";
 import {
   exteriorFrontCheck,
   exteriorLeftCheck,
   exteriorRearCheck,
   exteriorRightCheck,
 } from "@/app/utils";
-import { useSpeechRecognition } from "react-speech-recognition";
 
 interface Props {
   text: string;
+  reset: () => void;
 }
 
-export default function ExteriorCheck({ text }: Props) {
-  const { resetTranscript } = useSpeechRecognition();
-
-  const reset = useCallback(() => resetTranscript(), [resetTranscript]);
-
+export default function ExteriorCheck({ text, reset }: Props) {
   useEffect(() => {
     if (text) {
       if (text.includes("전면")) {
@@ -40,7 +36,7 @@ export default function ExteriorCheck({ text }: Props) {
   return (
     <div className={styles.container}>
       <div className={styles.card_wrapper}>
-        <p>외관 점검</p>
+        <div>외관 점검</div>
         <ul>
           <li id="front_side">
             <Image src={Front} width={100} alt="전면" />

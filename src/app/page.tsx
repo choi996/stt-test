@@ -14,7 +14,12 @@ import Microphone from "@/components/microphone";
 
 export default function Home() {
   const [isClient, setIsClient] = useState(false);
-  const { transcript, listening } = useSpeechRecognition();
+  const {
+    transcript,
+    listening,
+    resetTranscript,
+    browserSupportsSpeechRecognition,
+  } = useSpeechRecognition();
 
   const removeBlank = transcript.replace(/ /g, "");
 
@@ -33,8 +38,8 @@ export default function Home() {
       )}
       <VehicleInfo />
       <CustomerMemo />
-      <ExteriorCheck text={removeBlank} />
-      <BaseCheck text={removeBlank} />
+      <ExteriorCheck text={removeBlank} reset={resetTranscript} />
+      <BaseCheck text={removeBlank} reset={resetTranscript} />
       <ManagerMemo />
       <ul className={styles.description_wrapper}>
         <li>
@@ -74,7 +79,10 @@ export default function Home() {
           www.speedmate.com
         </a>
       </div>
-      <Microphone status={listening ? "on" : "off"} />
+      <Microphone
+        status={listening ? "on" : "off"}
+        isSupportSpeechRecognition={browserSupportsSpeechRecognition}
+      />
     </div>
   );
 }

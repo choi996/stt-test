@@ -7,7 +7,7 @@
   border-radius: 8px;
 
   display: flex;
-  @media screen and (max-width: 680px) {
+  @media screen and (max-width: 700px) {
     display: block;
   }
 }
@@ -21,13 +21,13 @@
 
 .card_wrapper > li:first-of-type > p {
   border-bottom-left-radius: 8px;
-  @media screen and (max-width: 680px) {
+  @media screen and (max-width: 700px) {
     border-bottom-left-radius: 0;
   }
 }
 
 .card_wrapper > li:not(:last-of-type) {
-  @media screen and (max-width: 680px) {
+  @media screen and (max-width: 700px) {
     border-bottom: 1px dotted var(--gray-scale-7);
   }
 }

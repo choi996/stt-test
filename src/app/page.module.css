@@ -1,7 +1,9 @@
 .page {
   width: 100%;
+  max-width: 1024px;
   min-height: 100svh;
   font-family: var(--font-geist-sans);
+  margin: 0 auto;
 }
 
 .description_wrapper {

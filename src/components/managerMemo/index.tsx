@@ -5,7 +5,7 @@ export default function ManagerMemo() {
   return (
     <div className={styles.container}>
       <div className={styles.card_wrapper}>
-        <p>종합 의견</p>
+        <div>종합 의견</div>
         <textarea />
       </div>
     </div>
