@@ -40,12 +40,14 @@ export default function VehicleInfo() {
           },
         });
 
+        console.log(data);
         if (data.carNumber.match(/^([가-힣]{2})?\d{2,3}[가-힣]\s?\d{4}$/)) {
           setCarNumber(data.carNumber);
         } else {
           alert("차량번호 인식 실패");
         }
       } catch (error) {
+        console.log(error);
         alert("차량번호 인식 실패");
       }
     }
