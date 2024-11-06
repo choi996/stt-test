@@ -29,7 +29,7 @@ export default function VehicleInfo() {
   const handleFile = async (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const axiosInstance = axios.create({
-        baseURL: "http://10.211.74.232:3001",
+        baseURL: "https://a4f0-206-219-44-244.ngrok-free.app",
       });
       const formData = new FormData();
       formData.append("file", e.target.files[0]);
