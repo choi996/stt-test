@@ -67,7 +67,6 @@ export default function VehicleInfo() {
             id="carNumber"
             type="file"
             accept="image/*"
-            capture="environment"
             onChange={handleFile}
             style={{ display: "none" }}
           />
