@@ -39,20 +39,55 @@ export default function ExteriorCheck({ text, reset }: Props) {
       <div className={styles.card_wrapper}>
         <div>외관 점검</div>
         <ul>
-          <li id="front_side">
+          <li>
             <Image src={Front} width={100} alt="전면" />
+            <div id="front_top" className={styles.front_top} />
+            <div id="front_bottom" className={styles.front_bottom} />
+            <div id="front_bonnet" className={styles.front_bonnet} />
+            <div
+              id="front_right_headlamp"
+              className={styles.front_right_headlamp}
+            />
+            <div
+              id="front_right_mirror"
+              className={styles.front_right_mirror}
+            />
+            <div
+              id="front_left_headlamp"
+              className={styles.front_left_headlamp}
+            />
+            <div id="front_left_mirror" className={styles.front_left_mirror} />
             전면
           </li>
-          <li id="left_side">
+          <li>
             <Image src={Left} width={160} alt="측면(L)" />
+            <div id="left_front_tire" className={styles.left_front_tire} />
+            <div id="left_front_door" className={styles.left_front_door} />
+            <div id="left_rear_tire" className={styles.left_rear_tire} />
+            <div id="left_rear_door" className={styles.left_rear_door} />
             측면(L)
           </li>
-          <li id="rear_side">
+          <li>
             <Image src={Rear} width={100} alt="후면" />
+            <div id="rear_top" className={styles.rear_top} />
+            <div id="rear_bottom" className={styles.rear_bottom} />
+            <div id="rear_trunk" className={styles.rear_trunk} />
+            <div
+              id="rear_right_taillamp"
+              className={styles.rear_right_taillamp}
+            />
+            <div
+              id="rear_left_taillamp"
+              className={styles.rear_left_taillamp}
+            />
             후면
           </li>
-          <li id="right_side">
+          <li>
             <Image src={Right} width={160} alt="측면(R)" />
+            <div id="right_front_tire" className={styles.right_front_tire} />
+            <div id="right_front_door" className={styles.right_front_door} />
+            <div id="right_rear_tire" className={styles.right_rear_tire} />
+            <div id="right_rear_door" className={styles.right_rear_door} />
             측면(R)
           </li>
         </ul>

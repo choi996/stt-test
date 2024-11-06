@@ -37,3 +37,153 @@
   position: relative;
   width: fit-content;
 }
+
+.card_wrapper > ul > li > div {
+  position: absolute;
+  border: 1px dotted var(--gray-scale-2);
+}
+
+.front_top {
+  top: 4px;
+  height: 10px;
+  width: 60px;
+  border-radius: 8px;
+}
+
+.front_bottom {
+  top: 50px;
+  height: 10px;
+  width: 90px;
+  border-radius: 8px;
+}
+
+.front_bonnet {
+  top: 24px;
+  height: 16px;
+  width: 36px;
+  border-radius: 8px;
+}
+
+.front_right_headlamp {
+  top: 30px;
+  left: 10px;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+}
+
+.front_right_mirror {
+  top: 18px;
+  left: 0;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+}
+
+.front_left_headlamp {
+  top: 30px;
+  right: 12px;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+}
+
+.front_left_mirror {
+  top: 18px;
+  right: 4px;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+}
+
+.left_front_tire {
+  top: 32px;
+  left: 20px;
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+}
+.left_front_door {
+  top: 20px;
+  left: 60px;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+}
+.left_rear_tire {
+  top: 32px;
+  right: 26px;
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+}
+.left_rear_door {
+  top: 20px;
+  right: 50px;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+}
+
+.rear_top {
+  top: 10px;
+  height: 10px;
+  width: 60px;
+  border-radius: 8px;
+}
+.rear_bottom {
+  top: 50px;
+  height: 10px;
+  width: 90px;
+  border-radius: 8px;
+}
+.rear_trunk {
+  top: 30px;
+  height: 14px;
+  left: 31px;
+  width: 36px;
+  border-radius: 8px;
+}
+.rear_right_taillamp {
+  top: 28px;
+  right: 16px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+}
+.rear_left_taillamp {
+  top: 28px;
+  left: 14px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+}
+
+.right_front_tire {
+  top: 30px;
+  right: 19px;
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+}
+.right_front_door {
+  top: 20px;
+  right: 60px;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+}
+.right_rear_tire {
+  top: 30px;
+  left: 26px;
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+}
+.right_rear_door {
+  top: 20px;
+  left: 50px;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+}
