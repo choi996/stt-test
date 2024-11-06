@@ -84,3 +84,20 @@ a {
 a:link {
   color: var(--gray-scale-4);
 }
+
+/* 기본 스타일 제거 */
+input[type="file"] {
+  appearance: none; /* 브라우저 기본 스타일 제거 */
+  -webkit-appearance: none; /* 웹킷 브라우저용 */
+  border: none;
+  padding: 0;
+  margin: 0;
+  background: none;
+  cursor: pointer;
+  outline: none;
+}
+
+/* 커스텀 스타일 (예시) */
+input[type="file"]::file-selector-button {
+  display: none; /* 기본 버튼 숨기기 */
+}
