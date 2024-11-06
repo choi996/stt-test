@@ -1,6 +1,5 @@
 "use client";
 import styles from "./baseCheck.module.css";
-import Front from "../../assets/images/vehicle_front.png";
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 import {
@@ -8,6 +7,21 @@ import {
   nonpassTextList,
   passTextList,
 } from "@/constants/strings";
+import AirfilterIcon from "../../assets/icon/Type=Airfilter.png";
+import BatteryIcon from "../../assets/icon/Type=Battery.png";
+import BreakoilIcon from "../../assets/icon/Type=Breakoil.png";
+import BreakpadIcon from "../../assets/icon/Type=Breakpad.png";
+import CoolantIcon from "../../assets/icon/Type=Coolant.png";
+import DashboardIcon from "../../assets/icon/Type=Dashboard.png";
+import DriveshiftIcon from "../../assets/icon/Type=Driveshift.png";
+import EVIcon from "../../assets/icon/Type=EV.png";
+import LampIcon from "../../assets/icon/Type=Lamp.png";
+import OilIcon from "../../assets/icon/Type=Oil.png";
+import SteeringIcon from "../../assets/icon/Type=Steering.png";
+import SuspensionIcon from "../../assets/icon/Type=Suspension.png";
+import TensionerIcon from "../../assets/icon/Type=Tensioner.png";
+import TirePressureIcon from "../../assets/icon/Type=TirePressure.png";
+import WiperIcon from "../../assets/icon/Type=Wiper.png";
 
 type CheckedTypes = "pass" | "nonpass" | "leak" | undefined;
 
@@ -130,6 +144,7 @@ export default function BaseCheck({ text, reset }: Props) {
       title: "엔진오일",
       status: engineOil,
       setStatus: setEngineOil,
+      icon: OilIcon,
       checkList: [
         {
           label: "양호",
@@ -149,6 +164,7 @@ export default function BaseCheck({ text, reset }: Props) {
       title: "브레이크 오일",
       status: breakOil,
       setStatus: setBreakOil,
+      icon: BreakoilIcon,
       checkList: [
         {
           label: "양호",
@@ -168,6 +184,7 @@ export default function BaseCheck({ text, reset }: Props) {
       title: "스티어링\n시스템",
       status: steering,
       setStatus: setSteering,
+      icon: SteeringIcon,
       checkList: [
         {
           label: "양호",
@@ -187,6 +204,7 @@ export default function BaseCheck({ text, reset }: Props) {
       title: "냉각수",
       status: coolant,
       setStatus: setCoolant,
+      icon: CoolantIcon,
       checkList: [
         {
           label: "양호",
@@ -206,6 +224,7 @@ export default function BaseCheck({ text, reset }: Props) {
       title: "외부벨트/텐셔너",
       status: tensioner,
       setStatus: setTensioner,
+      icon: TensionerIcon,
       checkList: [
         {
           label: "양호",
@@ -221,6 +240,7 @@ export default function BaseCheck({ text, reset }: Props) {
       title: "배터리",
       status: battery,
       setStatus: setBattery,
+      icon: BatteryIcon,
       checkList: [
         {
           label: "양호",
@@ -236,6 +256,7 @@ export default function BaseCheck({ text, reset }: Props) {
       title: "와이퍼",
       status: wiper,
       setStatus: setWiper,
+      icon: WiperIcon,
       checkList: [
         {
           label: "양호",
@@ -251,6 +272,7 @@ export default function BaseCheck({ text, reset }: Props) {
       title: "계기판\n경고등 상태",
       status: dashboard,
       setStatus: setDashboard,
+      icon: DashboardIcon,
       checkList: [
         {
           label: "양호",
@@ -266,6 +288,7 @@ export default function BaseCheck({ text, reset }: Props) {
       title: "공조장치 필터",
       status: airfilter,
       setStatus: setAirfilter,
+      icon: AirfilterIcon,
       checkList: [
         {
           label: "양호",
@@ -281,6 +304,7 @@ export default function BaseCheck({ text, reset }: Props) {
       title: "타이어 공기압\n마모도",
       status: tirePressure,
       setStatus: setTirePressure,
+      icon: TirePressureIcon,
       checkList: [
         {
           label: "양호",
@@ -296,6 +320,7 @@ export default function BaseCheck({ text, reset }: Props) {
       title: "브레이크 패드\n/ 디스크",
       status: breakpad,
       setStatus: setBreakpad,
+      icon: BreakpadIcon,
       checkList: [
         {
           label: "양호",
@@ -311,6 +336,7 @@ export default function BaseCheck({ text, reset }: Props) {
       title: "서스펜션",
       status: suspension,
       setStatus: setSuspension,
+      icon: SuspensionIcon,
       checkList: [
         {
           label: "양호",
@@ -326,6 +352,7 @@ export default function BaseCheck({ text, reset }: Props) {
       title: "드라이브 샤프트",
       status: driveShaft,
       setStatus: setDriveShaft,
+      icon: DriveshiftIcon,
       checkList: [
         {
           label: "양호",
@@ -341,6 +368,7 @@ export default function BaseCheck({ text, reset }: Props) {
       title: "외부 등화 장치",
       status: exLamp,
       setStatus: setExLamp,
+      icon: LampIcon,
       checkList: [
         {
           label: "양호",
@@ -410,7 +438,7 @@ export default function BaseCheck({ text, reset }: Props) {
           {baseCheckList.map((item) => (
             <li className={styles.check_unit_card} key={item.title}>
               <div className={styles.left_wrapper}>
-                <Image src={Front} alt="oil" width={40} />
+                <Image src={item.icon} alt={item.title} width={40} />
                 <p>{item.title}</p>
               </div>
               <div className={styles.right_wrapper}>
@@ -440,7 +468,7 @@ export default function BaseCheck({ text, reset }: Props) {
           <div key="ev" className={styles.check_ev_card}>
             <div>
               <div className={styles.left_wrapper}>
-                <Image src={Front} alt="oil" width={40} />
+                <Image src={EVIcon} alt="EV" width={40} />
                 <p>xEV</p>
               </div>
               <ul className={styles.ev_right_wrapper}>
