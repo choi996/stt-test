@@ -18,6 +18,7 @@ export default function Microphone({
     if (isOn) {
       SpeechRecognition.stopListening();
     } else {
+      alert(navigator.language);
       SpeechRecognition.startListening({ continuous: true, language: "ko" });
     }
   };
