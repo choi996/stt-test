@@ -32,7 +32,7 @@ interface Props {
 
 export default function BaseCheck({ text, reset }: Props) {
   const [engineOil, setEngineOil] = useState<CheckedTypes>();
-  const [breakOil, setBreakOil] = useState<CheckedTypes>();
+  const [brakeOil, setBreakOil] = useState<CheckedTypes>();
   const [steering, setSteering] = useState<CheckedTypes>();
   const [coolant, setCoolant] = useState<CheckedTypes>();
   const [tensioner, setTensioner] = useState<CheckedTypes>();
@@ -41,7 +41,7 @@ export default function BaseCheck({ text, reset }: Props) {
   const [dashboard, setDashboard] = useState<CheckedTypes>();
   const [airfilter, setAirfilter] = useState<CheckedTypes>();
   const [tirePressure, setTirePressure] = useState<CheckedTypes>();
-  const [breakpad, setBreakpad] = useState<CheckedTypes>();
+  const [brakepad, setBreakpad] = useState<CheckedTypes>();
   const [suspension, setSuspension] = useState<CheckedTypes>();
   const [driveShaft, setDriveShaft] = useState<CheckedTypes>();
   const [exLamp, setExLamp] = useState<CheckedTypes>();
@@ -162,7 +162,7 @@ export default function BaseCheck({ text, reset }: Props) {
     },
     {
       title: "브레이크 오일",
-      status: breakOil,
+      status: brakeOil,
       setStatus: setBreakOil,
       icon: BreakoilIcon,
       checkList: [
@@ -318,7 +318,7 @@ export default function BaseCheck({ text, reset }: Props) {
     },
     {
       title: "브레이크 패드\n/ 디스크",
-      status: breakpad,
+      status: brakepad,
       setStatus: setBreakpad,
       icon: BreakpadIcon,
       checkList: [

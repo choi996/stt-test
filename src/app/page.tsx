@@ -34,7 +34,7 @@ export default function Home() {
       <Header />
       <Date />
       {!!transcript && (
-        <div className={styles.transcript}>Script: {transcript}</div>
+        <div className={styles.transcript}>transcript: {transcript}</div>
       )}
       <VehicleInfo />
       <CustomerMemo />
