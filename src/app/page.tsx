@@ -1,8 +1,6 @@
 "use client";
 import "regenerator-runtime/runtime";
-import SpeechRecognition, {
-  useSpeechRecognition,
-} from "react-speech-recognition";
+import { useSpeechRecognition } from "react-speech-recognition";
 import styles from "./page.module.css";
 import { useEffect, useState } from "react";
 import Header from "@/components/header";
@@ -28,10 +26,6 @@ export default function Home() {
   useEffect(() => {
     setIsClient(true);
   }, []);
-
-  useEffect(() => {
-    alert(SpeechRecognition.getRecognition()?.lang);
-  }, [transcript]);
 
   if (!isClient) return null;
 
