@@ -215,3 +215,11 @@ export const exteriorRightCheck = (text: string, callback: () => void) => {
     }, 1000);
   }
 };
+
+let timer: NodeJS.Timer | null = null;
+export const debounce = (func: () => void, wait = 500) => {
+  if (timer) {
+    clearTimeout(timer as any);
+  }
+  timer = setTimeout(func, wait);
+};

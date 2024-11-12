@@ -11,6 +11,7 @@ import ExteriorCheck from "@/components/exteriorCheck";
 import BaseCheck from "@/components/baseCheck";
 import ManagerMemo from "@/components/managerMemo";
 import Microphone from "@/components/microphone";
+import axios from "axios";
 
 export default function Home() {
   const [isClient, setIsClient] = useState(false);
@@ -39,7 +40,7 @@ export default function Home() {
       <VehicleInfo />
       <CustomerMemo />
       <ExteriorCheck text={removeBlank} reset={resetTranscript} />
-      <BaseCheck text={removeBlank} reset={resetTranscript} />
+      <BaseCheck text={transcript} reset={resetTranscript} />
       <ManagerMemo />
       <ul className={styles.description_wrapper}>
         <li>
