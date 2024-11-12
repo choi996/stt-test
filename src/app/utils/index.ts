@@ -216,10 +216,10 @@ export const exteriorRightCheck = (text: string, callback: () => void) => {
   }
 };
 
-let timer: NodeJS.Timer | null = null;
+let timer: NodeJS.Timeout | null = null;
 export const debounce = (func: () => void, wait = 500) => {
   if (timer) {
-    clearTimeout(timer as any);
+    clearTimeout(timer);
   }
   timer = setTimeout(func, wait);
 };

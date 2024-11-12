@@ -43,7 +43,7 @@ export default function BaseCheck({ text, reset }: Props) {
       };
       debounce(() => getTranscript(), 1000);
     }
-  }, [text]);
+  }, [text, reset]);
 
   return (
     <div className={styles.container}>

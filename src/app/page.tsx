@@ -11,7 +11,6 @@ import ExteriorCheck from "@/components/exteriorCheck";
 import BaseCheck from "@/components/baseCheck";
 import ManagerMemo from "@/components/managerMemo";
 import Microphone from "@/components/microphone";
-import axios from "axios";
 
 export default function Home() {
   const [isClient, setIsClient] = useState(false);

@@ -6,7 +6,6 @@ import BrakepadIcon from "../../assets/icon/Type=Brakepad.png";
 import CoolantIcon from "../../assets/icon/Type=Coolant.png";
 import DashboardIcon from "../../assets/icon/Type=Dashboard.png";
 import DriveshaftIcon from "../../assets/icon/Type=Driveshaft.png";
-import EVIcon from "../../assets/icon/Type=EV.png";
 import LampIcon from "../../assets/icon/Type=Lamp.png";
 import OilIcon from "../../assets/icon/Type=Oil.png";
 import SteeringIcon from "../../assets/icon/Type=Steering.png";
