@@ -18,11 +18,11 @@ export default function BaseCheck({ text, reset }: Props) {
   const [result, setResult] = useState<{ [key in PartKeyTypes]: 0 | 1 | 2 }>();
 
   useEffect(() => {
-    if (text) {
+    if (text && !text.includes("완쪽") && !text.includes("오른쪽")) {
       const getTranscript = async () => {
         try {
           const { data } = await axios.post<QueryResponse>(
-            "https://5ddd-206-219-44-244.ngrok-free.app/query",
+            "https://980f-206-219-44-244.ngrok-free.app/query",
             {
               text,
             }
