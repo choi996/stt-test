@@ -1,6 +1,8 @@
 "use client";
 import "regenerator-runtime/runtime";
-import { useSpeechRecognition } from "react-speech-recognition";
+import SpeechRecognition, {
+  useSpeechRecognition,
+} from "react-speech-recognition";
 import styles from "./page.module.css";
 import { useEffect, useState } from "react";
 import Header from "@/components/header";
@@ -26,6 +28,14 @@ export default function Home() {
   useEffect(() => {
     setIsClient(true);
   }, []);
+
+  const handleOnOff = () => {
+    if (listening) {
+      SpeechRecognition.stopListening();
+    } else {
+      SpeechRecognition.startListening({ language: "ko", continuous: true });
+    }
+  };
 
   if (!isClient) return null;
 
@@ -80,8 +90,9 @@ export default function Home() {
         </a>
       </div>
       <Microphone
-        status={listening ? "on" : "off"}
+        listening={listening}
         isSupportSpeechRecognition={browserSupportsSpeechRecognition}
+        onClick={handleOnOff}
       />
     </div>
   );
