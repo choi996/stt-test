@@ -18,7 +18,7 @@ export default function BaseCheck({ text, reset }: Props) {
   const [result, setResult] = useState<{ [key in PartKeyTypes]: 0 | 1 | 2 }>();
 
   useEffect(() => {
-    if (text && !text.includes("완쪽") && !text.includes("오른쪽")) {
+    if (text && !text.includes("왼쪽") && !text.includes("오른쪽")) {
       const getTranscript = async () => {
         try {
           const { data } = await axios.post<QueryResponse>(
