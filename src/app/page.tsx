@@ -33,7 +33,7 @@ export default function Home() {
     if (listening) {
       SpeechRecognition.stopListening();
     } else {
-      SpeechRecognition.startListening({ language: "ko", continuous: true });
+      SpeechRecognition.startListening({ continuous: true });
     }
   };
 
