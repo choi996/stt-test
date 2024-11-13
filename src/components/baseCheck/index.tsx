@@ -34,11 +34,10 @@ export default function BaseCheck({ text, reset }: Props) {
             setResult((prev) =>
               !prev ? newResult : { ...prev, ...newResult }
             );
+            reset();
           }
         } catch (error) {
           console.log(error);
-        } finally {
-          reset();
         }
       };
       debounce(() => getTranscript(), 1000);
