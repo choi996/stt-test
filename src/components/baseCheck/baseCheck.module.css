@@ -138,6 +138,10 @@
   align-items: center;
   gap: 4px;
 }
+.right_wrapper > div > div > input {
+  flex-shrink: 0;
+  width: fit-content;
+}
 
 .right_wrapper > div > div > label {
   font-size: 12px;
