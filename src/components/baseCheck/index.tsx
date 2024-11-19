@@ -22,18 +22,19 @@ export default function BaseCheck({ text, reset }: Props) {
       const getTranscript = async () => {
         try {
           const { data } = await axios.post<QueryResponse>(
-            "https://980f-206-219-44-244.ngrok-free.app/query",
+            "https://3598-206-219-44-244.ngrok-free.app/query",
             {
               text,
             }
           );
           if (!!data.text) {
-            const newResult = {
-              [data.part_key]: data.check_status,
-            } as { [key in PartKeyTypes]: 0 | 1 | 2 };
-            setResult((prev) =>
-              !prev ? newResult : { ...prev, ...newResult }
-            );
+            alert(data.text);
+            // const newResult = {
+            //   [data.part_key]: data.check_status,
+            // } as { [key in PartKeyTypes]: 0 | 1 | 2 };
+            // setResult((prev) =>
+            //   !prev ? newResult : { ...prev, ...newResult }
+            // );
             reset();
           }
         } catch (error) {

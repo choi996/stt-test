@@ -43,7 +43,6 @@ export default function Term() {
   const toggleAlert = () => {
     setIsOpenAlert((prev) => !prev);
 
-    console.log("####");
     window.scrollTo({
       top: window.innerHeight,
     });
