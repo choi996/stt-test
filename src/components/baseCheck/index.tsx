@@ -15,7 +15,7 @@ interface Props {
 }
 
 export default function BaseCheck({ text, reset }: Props) {
-  const [result, setResult] = useState<{ [key in PartKeyTypes]: 0 | 1 | 2 }>();
+  const [result] = useState<{ [key in PartKeyTypes]: 0 | 1 | 2 }>();
 
   useEffect(() => {
     if (text && !text.includes("왼쪽") && !text.includes("오른쪽")) {
