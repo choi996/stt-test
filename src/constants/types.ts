@@ -38,12 +38,14 @@ export type PartTypes =
   | "충전 플러그"
   | "감속기 오일";
 
+export type CheckStatusTypes = 0 | 1 | 2;
+
 export type CheckListTypes = {
   title: PartTypes;
   key: PartKeyTypes;
   icon?: StaticImageData;
   checkList: {
     label: "양호" | "주의" | "교체" | "교체요" | "누유" | "누수";
-    value: 0 | 1 | 2;
+    value: CheckStatusTypes;
   }[];
 };

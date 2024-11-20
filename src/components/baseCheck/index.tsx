@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import EVIcon from "../../assets/icon/Type=EV.png";
 import axios from "axios";
 import { debounce } from "@/app/utils";
-import { PartKeyTypes } from "@/constants/types";
+import { CheckStatusTypes, PartKeyTypes } from "@/constants/types";
 import { QueryResponse } from "@/constants/interface";
 import { baseCheckList, evCheckList } from "./checklist";
 
@@ -14,11 +14,20 @@ interface Props {
   reset: () => void;
 }
 
+type CheckTypes = { [key in PartKeyTypes]: CheckStatusTypes };
+
 export default function BaseCheck({ text, reset }: Props) {
-  const [result] = useState<{ [key in PartKeyTypes]: 0 | 1 | 2 }>();
+  const [result, setResult] = useState<CheckTypes>();
 
   useEffect(() => {
-    if (text && !text.includes("왼쪽") && !text.includes("오른쪽")) {
+    if (
+      text &&
+      !text.includes("왼쪽") &&
+      !text.includes("오른쪽") &&
+      !text.includes("전면") &&
+      !text.includes("후면") &&
+      text.length > 4
+    ) {
       const getTranscript = async () => {
         try {
           const { data } = await axios.post<QueryResponse>(
@@ -28,13 +37,12 @@ export default function BaseCheck({ text, reset }: Props) {
             }
           );
           if (!!data.text) {
-            alert(data.text);
-            // const newResult = {
-            //   [data.part_key]: data.check_status,
-            // } as { [key in PartKeyTypes]: 0 | 1 | 2 };
-            // setResult((prev) =>
-            //   !prev ? newResult : { ...prev, ...newResult }
-            // );
+            const newResult = {
+              [data.part_key]: data.check_status,
+            } as CheckTypes;
+            setResult((prev) =>
+              !prev ? newResult : { ...prev, ...newResult }
+            );
             reset();
           }
         } catch (error) {
@@ -44,6 +52,24 @@ export default function BaseCheck({ text, reset }: Props) {
       debounce(() => getTranscript(), 1000);
     }
   }, [text, reset]);
+
+  const handleChange = ({
+    key,
+    status,
+  }: {
+    key: PartKeyTypes;
+    status: CheckStatusTypes;
+  }) => {
+    if (result && result[key] !== undefined && result[key] === status) {
+      const newState = { ...result };
+      delete newState[key];
+
+      setResult((prev) => (!prev ? prev : newState));
+    } else {
+      const newState = { [key]: status } as CheckTypes;
+      setResult((prev) => (!prev ? newState : { ...prev, ...newState }));
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -69,9 +95,9 @@ export default function BaseCheck({ text, reset }: Props) {
                           id={type}
                           name={type}
                           checked={v.value === result?.[item.key]}
-                          // onChange={() =>
-                          //   item.setStatus(v.value as CheckedTypes)
-                          // }
+                          onChange={() =>
+                            handleChange({ key: item.key, status: v.value })
+                          }
                         />
                         <label htmlFor={type}>{v.label}</label>
                       </div>
@@ -102,6 +128,9 @@ export default function BaseCheck({ text, reset }: Props) {
                               id={type}
                               name={type}
                               checked={v.value === result?.[item.key]}
+                              onChange={() =>
+                                handleChange({ key: item.key, status: v.value })
+                              }
                             />
                             <label htmlFor={type}>{v.label}</label>
                           </div>
