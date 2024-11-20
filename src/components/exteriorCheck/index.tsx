@@ -22,7 +22,12 @@ interface Props {
 export default function ExteriorCheck({ text, reset }: Props) {
   useEffect(() => {
     if (text) {
-      if (text.includes("전면") || bonnet.some((v) => text.includes(v))) {
+      if (
+        text.includes("정면") ||
+        text.includes("정년") ||
+        text.includes("전면") ||
+        bonnet.some((v) => text.includes(v))
+      ) {
         exteriorFrontCheck(text, reset);
       } else if (text.includes("후면") || text.includes("트렁크")) {
         exteriorRearCheck(text, reset);
