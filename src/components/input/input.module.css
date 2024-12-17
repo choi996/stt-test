@@ -1,0 +1,12 @@
+.container {
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--gray-scale-9);
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+}
+
+.container::placeholder {
+  color: var(--gray-scale-6);
+}

@@ -4,9 +4,53 @@
   min-height: 100svh;
   font-family: var(--font-geist-sans);
   margin: 0 auto;
+  position: relative;
+}
+
+.main_img_wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 0.7;
 }
 
 .transcript {
   padding: 0 20px;
   font-size: 16px;
+}
+
+.title_wrapper {
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.title {
+  padding: 20px 16px;
+  background-color: var(--gray-scale-12);
+}
+.title > b {
+  font-size: 24px;
+  line-height: 44px;
+}
+
+.title > p {
+  color: var(--gray-scale-4);
+}
+
+.speedmate {
+  padding: 20px 20px 40px;
+
+  background: linear-gradient(
+    to bottom,
+    rgb(255, 255, 255),
+    rgb(255, 255, 255, 0.5),
+    rgba(255, 255, 255, 0)
+  );
+}
+
+.body_wrapper {
+  padding: 24px 20px 120px;
+}
+.input_wrapper > :first-child {
+  margin-bottom: 12px;
 }

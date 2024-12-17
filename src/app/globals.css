@@ -102,3 +102,7 @@ input[type="file"] {
 input[type="file"]::file-selector-button {
   display: none; /* 기본 버튼 숨기기 */
 }
+
+img {
+  vertical-align: middle;
+}
