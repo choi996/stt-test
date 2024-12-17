@@ -4,4 +4,6 @@
   padding: 16px 20px 24px 20px;
   background-color: var(--gray-scale-12);
   width: 100%;
+
+  max-width: 1024px;
 }
