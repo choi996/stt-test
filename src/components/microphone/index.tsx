@@ -1,6 +1,6 @@
-import styles from "./microphone.module.css";
-import MicrophoneIcon from "../../assets/icon/Type=microphone.svg";
-import Image from "next/image";
+import styles from './microphone.module.css';
+import MicrophoneIcon from '../../assets/icon/Type=microphone.svg';
+import Image from 'next/image';
 
 interface Props {
   listening: boolean;
@@ -16,8 +16,8 @@ export default function Microphone({
   return (
     <div className={styles.container}>
       <div
-        className={`${styles.wrapper}  ${listening ? styles.on : ""} ${
-          isSupportSpeechRecognition ? "" : styles.disabled
+        className={`${styles.wrapper}  ${listening ? styles.on : ''} ${
+          isSupportSpeechRecognition ? '' : styles.disabled
         }`}
         onClick={isSupportSpeechRecognition ? onClick : undefined}
       >
