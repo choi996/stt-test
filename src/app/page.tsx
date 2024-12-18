@@ -3,7 +3,7 @@ import styles from './page.module.css';
 import MainImage from '@/assets/images/main.png';
 import SpeedmateLogoImage from '@/assets/images/speedmate.png';
 import Image from 'next/image';
-import LoginForm from '@/components/loginForm';
+import LoginForm from '@/app/_components/loginForm';
 
 export default function Home() {
   return (

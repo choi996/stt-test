@@ -1,18 +1,18 @@
-"use client";
-import styles from "./exteriorCheck.module.css";
-import Front from "../../assets/images/vehicle_front.png";
-import Rear from "../../assets/images/vehicle_rear.png";
-import Left from "../../assets/images/vehicle_left.png";
-import Right from "../../assets/images/vehicle_right.png";
-import Image from "next/image";
-import { MouseEvent, useEffect } from "react";
+'use client';
+import styles from './exteriorCheck.module.css';
+import Front from '@/assets/images/vehicle_front.png';
+import Rear from '@/assets/images/vehicle_rear.png';
+import Left from '@/assets/images/vehicle_left.png';
+import Right from '@/assets/images/vehicle_right.png';
+import Image from 'next/image';
+import { MouseEvent, useEffect } from 'react';
 import {
   exteriorFrontCheck,
   exteriorLeftCheck,
   exteriorRearCheck,
   exteriorRightCheck,
-} from "@/app/utils";
-import { bonnet } from "@/constants/strings";
+} from '@/app/utils';
+import { bonnet } from '@/app/_lib/constants/strings';
 
 interface Props {
   text: string;
@@ -23,17 +23,17 @@ export default function ExteriorCheck({ text, reset }: Props) {
   useEffect(() => {
     if (text) {
       if (
-        text.includes("정면") ||
-        text.includes("정년") ||
-        text.includes("전면") ||
+        text.includes('정면') ||
+        text.includes('정년') ||
+        text.includes('전면') ||
         bonnet.some((v) => text.includes(v))
       ) {
         exteriorFrontCheck(text, reset);
-      } else if (text.includes("후면") || text.includes("트렁크")) {
+      } else if (text.includes('후면') || text.includes('트렁크')) {
         exteriorRearCheck(text, reset);
-      } else if (text.includes("왼쪽")) {
+      } else if (text.includes('왼쪽')) {
         exteriorLeftCheck(text, reset);
-      } else if (text.includes("오른쪽")) {
+      } else if (text.includes('오른쪽')) {
         exteriorRightCheck(text, reset);
       }
     }
@@ -42,11 +42,11 @@ export default function ExteriorCheck({ text, reset }: Props) {
   const handleClick = (e: MouseEvent<HTMLDivElement>) => {
     const target = e.target as HTMLDivElement;
     const borderStyle = window.getComputedStyle(target).borderStyle;
-    const isInActive = borderStyle === "dotted";
+    const isInActive = borderStyle === 'dotted';
     if (isInActive) {
-      target.style.border = "1px solid red";
+      target.style.border = '1px solid red';
     } else {
-      target.style.border = "1px dotted var(--gray-scale-2)";
+      target.style.border = '1px dotted var(--gray-scale-2)';
     }
   };
 

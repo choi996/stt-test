@@ -1,5 +1,5 @@
 import styles from './microphone.module.css';
-import MicrophoneIcon from '../../assets/icon/Type=microphone.svg';
+import MicrophoneIcon from '@/assets/icon/Type=microphone.svg';
 import Image from 'next/image';
 
 interface Props {

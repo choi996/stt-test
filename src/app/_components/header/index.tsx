@@ -1,6 +1,6 @@
-import Image from "next/image";
-import SMLogo from "../../assets/images/sm_logo.png";
-import styles from "./header.module.css";
+import Image from 'next/image';
+import SMLogo from '@/assets/images/sm_logo.png';
+import styles from './header.module.css';
 
 export default function Header() {
   return (

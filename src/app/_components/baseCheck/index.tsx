@@ -1,13 +1,13 @@
-"use client";
-import styles from "./baseCheck.module.css";
-import Image from "next/image";
-import { useEffect, useState } from "react";
-import EVIcon from "../../assets/icon/Type=EV.png";
-import axios from "axios";
-import { debounce } from "@/app/utils";
-import { CheckStatusTypes, PartKeyTypes } from "@/constants/types";
-import { QueryResponse } from "@/constants/interface";
-import { baseCheckList, evCheckList } from "./checklist";
+'use client';
+import styles from './baseCheck.module.css';
+import Image from 'next/image';
+import { useEffect, useState } from 'react';
+import EVIcon from '@/assets/icon/Type=EV.png';
+import axios from 'axios';
+import { debounce } from '@/app/utils';
+import { CheckStatusTypes, PartKeyTypes } from '@/app/_lib/constants/types';
+import { QueryResponse } from '@/app/_lib/constants/interface';
+import { baseCheckList, evCheckList } from './checklist';
 
 interface Props {
   text: string;
@@ -22,26 +22,26 @@ export default function BaseCheck({ text, reset }: Props) {
   useEffect(() => {
     if (
       text &&
-      !text.includes("왼쪽") &&
-      !text.includes("오른쪽") &&
-      !text.includes("전면") &&
-      !text.includes("후면") &&
+      !text.includes('왼쪽') &&
+      !text.includes('오른쪽') &&
+      !text.includes('전면') &&
+      !text.includes('후면') &&
       text.length > 4
     ) {
       const getTranscript = async () => {
         try {
           const { data } = await axios.post<QueryResponse>(
-            "https://3598-206-219-44-244.ngrok-free.app/query",
+            'https://3598-206-219-44-244.ngrok-free.app/query',
             {
               text,
-            }
+            },
           );
           if (!!data.text) {
             const newResult = {
               [data.part_key]: data.check_status,
             } as CheckTypes;
             setResult((prev) =>
-              !prev ? newResult : { ...prev, ...newResult }
+              !prev ? newResult : { ...prev, ...newResult },
             );
             reset();
           }

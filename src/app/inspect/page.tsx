@@ -1,19 +1,19 @@
-"use client";
-import "regenerator-runtime/runtime";
+'use client';
+import 'regenerator-runtime/runtime';
 import SpeechRecognition, {
   useSpeechRecognition,
-} from "react-speech-recognition";
-import styles from "./page.module.css";
-import { useEffect, useState } from "react";
-import Header from "@/components/header";
-import Date from "@/components/date";
-import VehicleInfo from "@/components/vehicleInfo";
-import CustomerMemo from "@/components/customerMemo";
-import ExteriorCheck from "@/components/exteriorCheck";
-import BaseCheck from "@/components/baseCheck";
-import ManagerMemo from "@/components/managerMemo";
-import Microphone from "@/components/microphone";
-import Term from "@/components/term";
+} from 'react-speech-recognition';
+import styles from './page.module.css';
+import { useEffect, useState } from 'react';
+import Header from '@/app/_components/header';
+import Date from '@/app/_components/date';
+import VehicleInfo from '@/app/_components/vehicleInfo';
+import CustomerMemo from '@/app/_components/customerMemo';
+import ExteriorCheck from '@/app/_components/exteriorCheck';
+import BaseCheck from '@/app/_components/baseCheck';
+import ManagerMemo from '@/app/_components/managerMemo';
+import Microphone from '@/app/_components/microphone';
+import Term from '@/app/_components/term';
 
 export default function Inspect() {
   const [isClient, setIsClient] = useState(false);
@@ -24,7 +24,7 @@ export default function Inspect() {
     browserSupportsSpeechRecognition,
   } = useSpeechRecognition();
 
-  const removeBlank = transcript.replace(/ /g, "");
+  const removeBlank = transcript.replace(/ /g, '');
 
   useEffect(() => {
     setIsClient(true);
