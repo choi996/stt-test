@@ -1,9 +1,3 @@
-'use client';
-
-import { ChangeEvent, useState } from 'react';
-import { clearBlank } from '@/app/_lib/utils';
-import { regex } from '@/app/_lib/constants/strings';
-
 interface VehicleInfo {
   vehicleType: string;
   vehicleNumber: string;
@@ -11,38 +5,38 @@ interface VehicleInfo {
 }
 
 export default function VehicleInfo() {
-  const [type, setType] = useState('');
-  const [carNumber, setCarNumber] = useState('');
-  const [distance, setDistance] = useState('');
+  // const [type, setType] = useState('');
+  // const [carNumber, setCarNumber] = useState('');
+  // const [distance, setDistance] = useState('');
 
-  const [carNumberError, setCarNumberError] = useState(false);
+  // const [carNumberError, setCarNumberError] = useState(false);
 
-  const handleChangeType = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
+  // const handleChangeType = (e: ChangeEvent<HTMLInputElement>) => {
+  //   const { value } = e.target;
 
-    setType(value);
-  };
+  //   setType(value);
+  // };
 
-  const handleChangeNumber = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
+  // const handleChangeNumber = (e: ChangeEvent<HTMLInputElement>) => {
+  //   const { value } = e.target;
 
-    const clear = clearBlank(value);
+  //   const clear = clearBlank(value);
 
-    setCarNumberError(!!clear && !regex.carNumber.test(clear));
+  //   setCarNumberError(!!clear && !regex.carNumber.test(clear));
 
-    setCarNumber(clear);
-  };
+  //   setCarNumber(clear);
+  // };
 
-  const handleChangeDistance = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
+  // const handleChangeDistance = (e: ChangeEvent<HTMLInputElement>) => {
+  //   const { value } = e.target;
 
-    const removeComma = value.replaceAll(',', '');
-    if (!!removeComma && !removeComma.match(/^[0-9]+$/)) {
-      return;
-    }
+  //   const removeComma = value.replaceAll(',', '');
+  //   if (!!removeComma && !removeComma.match(/^[0-9]+$/)) {
+  //     return;
+  //   }
 
-    setDistance(!removeComma ? '' : Number(removeComma).toLocaleString());
-  };
+  //   setDistance(!removeComma ? '' : Number(removeComma).toLocaleString());
+  // };
 
   return (
     <div className="pt-16 px-20 pb-8">
@@ -61,11 +55,11 @@ export default function VehicleInfo() {
         <li className="border-b border-dotted md:border-none">
           <p>차량번호</p>
           <div className="text-body7 w-full text-right mr-24">311가3131</div>
-          {carNumberError && (
+          {/* {carNumberError && (
             <span className="absolute bottom-0 right-16 text-body11 text-systemRed2">
               차량번호를 확인해주세요
             </span>
-          )}
+          )} */}
         </li>
         <li className="border-b border-dotted md:border-none">
           <p className="rounded-tl-lg md:rounded-bl-lg">차종</p>
