@@ -63,6 +63,7 @@ export default function CustomerMemo() {
       </div>
     );
   };
+  
   return (
     <div className="pt-0 px-20 pb-8">
       <div className="border border-solid border-gray2 rounded-lg flex">

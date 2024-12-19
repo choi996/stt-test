@@ -1,4 +1,5 @@
 'use client';
+import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 
 interface Props {
@@ -7,10 +8,10 @@ interface Props {
     value: string;
   }[];
   activeKey?: string;
-  onChange: (activeKey: string) => void;
+  onClick?: (activeKey: string) => void;
 }
 
-export default function Tab({ options, activeKey, onChange }: Props) {
+export default function Tab({ options, activeKey, onClick }: Props) {
   const [activeIndex, setActiveIndex] = useState(-1);
   const [position, setPosition] = useState({
     width: -1,
@@ -41,6 +42,12 @@ export default function Tab({ options, activeKey, onChange }: Props) {
     setActiveIndex(options.findIndex((item) => item.value === activeKey));
   }, [activeKey, options]);
 
+  const handleChange = (value: string) => {
+    if (onClick) {
+      onClick(value);
+    }
+  };
+
   return (
     <ul
       ref={tabRef}
@@ -48,15 +55,16 @@ export default function Tab({ options, activeKey, onChange }: Props) {
     >
       {options.map(({ label, value }, index) => (
         <li
+          id={value}
           key={value}
           ref={(ref) => {
             itemRef.current[index] = ref;
           }}
           className={`py-12 px-20 text-center ${value === activeKey ? 'text-heading8' : 'text-body7'}
           ${value === activeKey ? 'text-gray2' : 'text-gray4'} transition-colors`}
-          onClick={() => onChange(value)}
+          onClick={() => handleChange(value)}
         >
-          {label}
+          <Link href={`#${value}`}>{label}</Link>
         </li>
       ))}
       <div

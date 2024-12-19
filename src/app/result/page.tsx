@@ -3,7 +3,12 @@ import BMWIcon from '@/assets/icon/BMW.svg';
 import BMWImage from '@/assets/images/BMW.png';
 import Image from 'next/image';
 import Tab from '../_components/Tab';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import {
+  useParams,
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from 'next/navigation';
 
 import FrontImage from '@/assets/images/result/front.png';
 import RearImage from '@/assets/images/result/rear.png';
@@ -17,17 +22,11 @@ import TireIcon from '@/assets/icon/tire.svg';
 import BatteryIcon from '@/assets/icon/battery.svg';
 import OilIcon from '@/assets/icon/oil.svg';
 import FloatBottomWrapper2 from '../_components/FloatBottomWrapper2';
+import { useHash } from '../_lib/hooks/useHash';
 
 export default function ResultPage() {
   const { push } = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-
-  const tab = searchParams.get('tab');
-
-  const handleChangeTab = (type: string) => {
-    push(`${pathname}?tab=${type}`);
-  };
+  const hash = useHash();
 
   return (
     <div>
@@ -54,10 +53,9 @@ export default function ResultPage() {
           { label: '기본점검', value: 'basic' },
           { label: '정밀점검(진단기)', value: 'expert' },
         ]}
-        activeKey={tab || 'exterial'}
-        onChange={handleChangeTab}
+        activeKey={hash || 'exterial'}
       />
-      {(!tab || tab === 'exterial') && (
+      {(!hash || hash === 'exterial') && (
         <ul className="pt-24 pb-120 px-20 grid gap-20">
           <li>
             <p className="text-heading7 mb-24">전면</p>
@@ -101,7 +99,7 @@ export default function ResultPage() {
           </li>
         </ul>
       )}
-      {tab === 'basic' && (
+      {hash === 'basic' && (
         <div>
           <section className="py-24 px-20 border-b-8 border-b-gray11">
             <p className="text-heading7 mb-24">소모품</p>
