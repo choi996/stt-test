@@ -21,7 +21,7 @@ export default function BaseCheck({ text, reset }: Props) {
   const [oilFocus, setOilFocus] = useState(false);
 
   useEffect(() => {
-    if(text === '엔진오일 메') {
+    if (text === '엔진오일 메') {
       return;
     }
     if (
@@ -72,21 +72,21 @@ export default function BaseCheck({ text, reset }: Props) {
             setResult((prev) =>
               !prev ? newResult : { ...prev, ...newResult },
             );
-           if(data.part_key === 'engine_oil' && data.check_status === 1) {
-            const oil_textarea = document.getElementById('engine_oil');
+            if (data.part_key === 'engine_oil' && data.check_status === 1) {
+              const oil_textarea = document.getElementById('engine_oil');
 
-            oil_textarea?.focus();
-            setOilFocus(true)
-           }
+              oil_textarea?.focus();
+              setOilFocus(true);
+            }
           }
-          reset()
+          reset();
         } catch (error) {
           console.log(error);
         }
       };
       debounce(() => getTranscript(), 1000);
     }
-  }, [text, reset]);
+  }, [text, reset, oilFocus]);
 
   const handleChange = ({
     key,

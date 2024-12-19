@@ -36,7 +36,7 @@ export default function Button({
       default:
         return 'py-16 px-12 text-button2 h-56';
     }
-  }, []);
+  }, [size]);
 
   const colorClasses = useMemo(() => {
     switch (color) {
@@ -53,7 +53,7 @@ export default function Button({
           return 'bg-gray10 border-none text-gray2';
         }
     }
-  }, []);
+  }, [color, isGhost]);
 
   return (
     <button

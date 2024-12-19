@@ -3,12 +3,7 @@ import BMWIcon from '@/assets/icon/BMW.svg';
 import BMWImage from '@/assets/images/BMW.png';
 import Image from 'next/image';
 import Tab from '../_components/Tab';
-import {
-  useParams,
-  usePathname,
-  useRouter,
-  useSearchParams,
-} from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 import FrontImage from '@/assets/images/result/front.png';
 import RearImage from '@/assets/images/result/rear.png';

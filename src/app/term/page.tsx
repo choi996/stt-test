@@ -22,19 +22,19 @@ export default function ReadyPage() {
     });
 
     setTimeout(() => {
-      setLoading(true)
+      setLoading(true);
     }, 5000);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
-    if(loading) {
+    if (loading) {
       setTimeout(() => {
-        push('/talk')
+        push('/talk');
       }, 5000);
     }
-  }, [loading])
+  }, [loading, push]);
 
   return (
     <div>
@@ -42,7 +42,10 @@ export default function ReadyPage() {
         <Image src={ArrowLeft} alt="left" onClick={() => back()} />
       </header>
       <div className="py-24 px-20">
-        <h3 className="text-heading3 mb-32">진단 {loading ? '2': '1'}개월 후<br/>진단 정보 분석 CRM Working...</h3>
+        <h3 className="text-heading3 mb-32">
+          진단 {loading ? '2' : '1'}개월 후<br />
+          진단 정보 분석 CRM Working...
+        </h3>
         <div ref={container} className="h-300" />
       </div>
     </div>
