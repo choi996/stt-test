@@ -1,25 +1,25 @@
-"use client";
-import { useRef, useState } from "react";
-import Alert from "../alert";
-import SignatureCanvas from "../signatureCanvas";
-import styles from "./customerMemo.module.css";
+/* eslint-disable @next/next/no-img-element */
+'use client';
+import { useRef, useState } from 'react';
+import Alert from '../Alert';
+import SignatureCanvas from '../SignatureCanvas';
 
 export default function CustomerMemo() {
   const [isOpenAlert, setIsOpenAlert] = useState(false);
-  const [signatureImage, setSignatureImage] = useState("");
+  const [signatureImage, setSignatureImage] = useState('');
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const isCanvasEmpty = () => {
     if (!canvasRef.current) return true;
-    const ctx = canvasRef.current.getContext("2d");
+    const ctx = canvasRef.current.getContext('2d');
     if (!ctx) return true;
 
     const canvasData = ctx.getImageData(
       0,
       0,
       canvasRef.current.width,
-      canvasRef.current.height
+      canvasRef.current.height,
     ).data;
 
     for (let i = 0; i < canvasData.length; i += 4) {
@@ -33,9 +33,9 @@ export default function CustomerMemo() {
   const handleSave = () => {
     if (!canvasRef.current) return;
     if (isCanvasEmpty()) {
-      return alert("서명을 해주세요.");
+      return alert('서명을 해주세요.');
     } else {
-      const dataURL = canvasRef.current.toDataURL("image/png");
+      const dataURL = canvasRef.current.toDataURL('image/png');
       setSignatureImage(dataURL);
       toggleAlert();
     }
@@ -45,34 +45,41 @@ export default function CustomerMemo() {
 
   const renderSignature = () => {
     return (
-      <div className={styles.signature_wrapper} onClick={toggleAlert}>
+      <div
+        className="flex items-center xs:justify-center relative xs:p-12 w-full"
+        onClick={toggleAlert}
+      >
         {!!signatureImage ? (
           <img
+            className="absolute bottom-[-20px] left-0"
             src={signatureImage}
             width={120}
             style={{ maxHeight: 40 }}
             alt="서명"
           />
         ) : (
-          <button className={styles.signature_button}>Signature</button>
+          <button className="text-gray4 text-body7 p-0">Signature</button>
         )}
       </div>
     );
   };
   return (
-    <div className={styles.container}>
-      <div className={styles.card_wrapper}>
-        <p>
+    <div className="pt-0 px-20 pb-8">
+      <div className="border border-solid border-gray2 rounded-lg flex">
+        <p className="text-center py-12 px-20 min-w-96 bg-gray11 rounded-tl-lg rounded-bl-lg text-heading8">
           고 객<br />요 청<br />사 항
         </p>
-        <textarea />
-        <div>
-          <p>점검 담당자</p>
+        <textarea className="rounded-tr-lg rounded-br-lg" />
+        <div className="hidden xs:block w-1/3 min-w-120 rounded-br-lg border-l border-solid border-gray2">
+          <p className="py-12 px-20 text-center text-heading8 bg-gray11 rounded-tr-lg">
+            점검 담당자
+          </p>
           {renderSignature()}
         </div>
       </div>
-      <div className={styles.check_mamager}>
-        <p>* 점검 담당자:</p> {renderSignature()}
+      <div className="xs:hidden flex items-center mt-12 gap-12">
+        <p className="text-body7 min-w-84 text-gray4">* 점검 담당자:</p>{' '}
+        {renderSignature()}
       </div>
 
       <Alert

@@ -2,11 +2,12 @@ import {
   MouseEvent,
   RefObject,
   TouchEvent,
+  useCallback,
   useEffect,
   useRef,
   useState,
-} from "react";
-import styles from "./signature.module.css";
+} from 'react';
+import styles from './signature.module.css';
 
 interface Props {
   canvasRef: RefObject<HTMLCanvasElement>;
@@ -21,7 +22,7 @@ export default function SignatureCanvas({ canvasRef }: Props) {
     y: number;
   } | null>(null);
 
-  const resizeCanvas = () => {
+  const resizeCanvas = useCallback(() => {
     const canvas = canvasRef.current;
     const container = containerRef.current;
 
@@ -29,27 +30,27 @@ export default function SignatureCanvas({ canvasRef }: Props) {
       canvas.width = container.clientWidth;
       canvas.height = container.clientHeight;
     }
-  };
+  }, [canvasRef]);
 
   useEffect(() => {
     resizeCanvas();
-    window.addEventListener("resize", resizeCanvas);
+    window.addEventListener('resize', resizeCanvas);
     return () => {
-      window.removeEventListener("resize", resizeCanvas);
+      window.removeEventListener('resize', resizeCanvas);
     };
-  }, []);
+  }, [resizeCanvas]);
 
   const getCanvasOffset = (
-    e: MouseEvent<HTMLCanvasElement> | TouchEvent<HTMLCanvasElement>
+    e: MouseEvent<HTMLCanvasElement> | TouchEvent<HTMLCanvasElement>,
   ) => {
     const canvas = canvasRef.current;
     if (!canvas) return { x: 0, y: 0 };
 
     const rect = canvas.getBoundingClientRect();
     const offsetX =
-      "touches" in e ? e.touches[0].clientX - rect.left : e.clientX - rect.left;
+      'touches' in e ? e.touches[0].clientX - rect.left : e.clientX - rect.left;
     const offsetY =
-      "touches" in e ? e.touches[0].clientY - rect.top : e.clientY - rect.top;
+      'touches' in e ? e.touches[0].clientY - rect.top : e.clientY - rect.top;
 
     return { x: offsetX, y: offsetY };
   };
@@ -64,12 +65,12 @@ export default function SignatureCanvas({ canvasRef }: Props) {
     if (!isDrawing || !lastPosition || !canvasRef.current) return;
 
     const { x, y } = getCanvasOffset(e);
-    const ctx = canvasRef.current.getContext("2d");
+    const ctx = canvasRef.current.getContext('2d');
     if (ctx) {
       ctx.beginPath();
       ctx.moveTo(lastPosition.x, lastPosition.y);
       ctx.lineTo(x, y);
-      ctx.strokeStyle = "black";
+      ctx.strokeStyle = 'black';
       ctx.lineWidth = 2;
       ctx.stroke();
       ctx.closePath();
@@ -92,12 +93,12 @@ export default function SignatureCanvas({ canvasRef }: Props) {
     if (!isDrawing || !lastPosition || !canvasRef.current) return;
 
     const { x, y } = getCanvasOffset(e);
-    const ctx = canvasRef.current.getContext("2d");
+    const ctx = canvasRef.current.getContext('2d');
     if (ctx) {
       ctx.beginPath();
       ctx.moveTo(lastPosition.x, lastPosition.y);
       ctx.lineTo(x, y);
-      ctx.strokeStyle = "black";
+      ctx.strokeStyle = 'black';
       ctx.lineWidth = 2;
       ctx.stroke();
       ctx.closePath();

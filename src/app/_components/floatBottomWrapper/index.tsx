@@ -1,15 +1,15 @@
-import Button, { ButtonProps } from "../button";
-import styles from "./floatBottomWrapper.module.css";
+import { memo } from 'react';
+import Button, { ButtonProps } from '../Button';
 
 type FloatButtonWrapper = Pick<
   ButtonProps,
-  "label" | "isFull" | "type" | "disabled" | "onClick"
+  'label' | 'isFull' | 'type' | 'disabled' | 'onClick'
 >;
 
-export default function FloatBottomWrapper(props: FloatButtonWrapper) {
+export default memo(function FloatBottomWrapper(props: FloatButtonWrapper) {
   return (
-    <div className={styles.container}>
+    <div className="fixed bottom-0 pt-16 pr-20 pb-24 pl-20 bg-gray12 w-full max-w-1024">
       <Button {...props} />
     </div>
   );
-}
+});

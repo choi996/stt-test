@@ -1,5 +1,6 @@
-import { MouseEvent, PropsWithChildren, useEffect } from "react";
-import styles from "./alert.module.css";
+import { MouseEvent, PropsWithChildren, useEffect, useState } from 'react';
+import styles from './alert.module.css';
+import Button from '../Button';
 
 interface Props extends PropsWithChildren {
   title: string;
@@ -15,21 +16,25 @@ export default function Alert({
   title,
   isVisible,
   onClose,
-  primaryText = "확인",
-  secondaryText = "닫기",
+  primaryText = '확인',
+  secondaryText = '닫기',
   onPrimaryClick,
   onSecondaryClick,
   children,
 }: Props) {
+  const [isOpen, setIsOpen] = useState(false);
+
   useEffect(() => {
     if (isVisible) {
-      document.body.style.overflow = "hidden";
-      document.body.style.overscrollBehaviorY = "contain";
-      document.documentElement.style.overscrollBehavior = "contain";
+      setIsOpen(true);
+      document.body.style.overflow = 'hidden';
+      document.body.style.overscrollBehaviorY = 'contain';
+      document.documentElement.style.overscrollBehavior = 'contain';
     } else {
-      document.body.style.overflow = "auto";
-      document.documentElement.style.overscrollBehavior = "";
-      document.body.style.overscrollBehavior = "";
+      setIsOpen(false);
+      document.body.style.overflow = 'auto';
+      document.documentElement.style.overscrollBehavior = '';
+      document.body.style.overscrollBehavior = '';
     }
   }, [isVisible]);
 
@@ -42,21 +47,35 @@ export default function Alert({
 
   return (
     <>
-      <div className={styles.alert_overlay} onClick={handleClose} />
-      <div className={styles.alert_wrapper}>
-        <div className={styles.title}>{title}</div>
+      <div
+        className={`fixed top-0 right-0 bottom-0 left-0 bg-[rgba(0,0,0,0.3)] z-dim
+        transition-opacity flex items-center justify-center overflow-auto
+        ${isOpen ? 'opactiy-30' : 'opacity-0'}
+      `}
+        onClick={handleClose}
+      />
+      <div
+        className={`w-[calc(100%-40px)] bg-gray12 py-24 px-12 rounded-xl z-alert 
+          fixed top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2
+          `}
+      >
+        <div className="text-center whitespace-pre-line mb-24 text-heading7">
+          {title}
+        </div>
         <div>{children}</div>
         {(!!onPrimaryClick || !!onSecondaryClick) && (
-          <div className={styles.button_wrapper}>
+          <div className="flex gap-8 mt-16 w-full">
             {!!onSecondaryClick && (
-              <button className={styles.secondary} onClick={onSecondaryClick}>
-                {secondaryText}
-              </button>
+              <Button
+                onClick={onSecondaryClick}
+                label={secondaryText}
+                color="gray"
+                isGhost
+                size={44}
+              />
             )}
             {!!onPrimaryClick && (
-              <button className={styles.primary} onClick={onPrimaryClick}>
-                {primaryText}
-              </button>
+              <Button onClick={onPrimaryClick} label={primaryText} size={44} />
             )}
           </div>
         )}

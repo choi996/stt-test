@@ -1,18 +1,15 @@
 'use client';
-
 import { useRouter } from 'next/navigation';
 import { ChangeEvent, FormEvent, useCallback, useState } from 'react';
-import styles from './loginForm.module.css';
-import Input from '../input';
-import FloatBottomWrapper from '../floatBottomWrapper';
+import Input from '../Input';
+import FloatBottomWrapper from '../FloatBottomWrapper';
+import { clearBlank } from '@/app/_lib/utils';
 
 export default function LoginForm() {
   const { push } = useRouter();
 
   const [code, setCode] = useState('');
   const [password, setPassword] = useState('');
-
-  const clearBlank = (s: string) => s.replace(/ /g, '');
 
   const handleChangeCode = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -36,8 +33,8 @@ export default function LoginForm() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className={styles.container}>
-        <div className={styles.input_wrapper}>
+      <div className="pt-24 px-20 pb-120">
+        <div className="flex flex-col gap-12">
           <Input
             name="code"
             placeholder="매장코드 입력 (cf.S001, F001)"

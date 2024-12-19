@@ -3,17 +3,18 @@ import 'regenerator-runtime/runtime';
 import SpeechRecognition, {
   useSpeechRecognition,
 } from 'react-speech-recognition';
-import styles from './page.module.css';
 import { useEffect, useState } from 'react';
-import Header from '@/app/_components/header';
-import Date from '@/app/_components/date';
-import VehicleInfo from '@/app/_components/vehicleInfo';
-import CustomerMemo from '@/app/_components/customerMemo';
-import ExteriorCheck from '@/app/_components/exteriorCheck';
-import BaseCheck from '@/app/_components/baseCheck';
-import ManagerMemo from '@/app/_components/managerMemo';
-import Microphone from '@/app/_components/microphone';
-import Term from '@/app/_components/term';
+
+import CustomerMemo from '@/app/_components/CustomerMemo';
+import BaseCheck from '@/app/_components/BaseCheck';
+import { clearBlank } from '../_lib/utils';
+import dayjs from 'dayjs';
+import Header from '../_components/Header';
+import VehicleInfo from '../_components/VehicleInfo';
+import ManagerMemo from '../_components/ManagerMemo';
+import Term from '../_components/Term';
+import Microphone from '../_components/Microphone';
+import ExteriorCheck from '../_components/ExteriorCheck';
 
 export default function Inspect() {
   const [isClient, setIsClient] = useState(false);
@@ -23,8 +24,6 @@ export default function Inspect() {
     resetTranscript,
     browserSupportsSpeechRecognition,
   } = useSpeechRecognition();
-
-  const removeBlank = transcript.replace(/ /g, '');
 
   useEffect(() => {
     setIsClient(true);
@@ -41,15 +40,17 @@ export default function Inspect() {
   if (!isClient) return null;
 
   return (
-    <div className={styles.page}>
+    <div className="w-full max-w-1024 my-0 mx-auto">
       <Header />
-      <Date />
+      <div className="py-16 px-20 w-full flex justify-end text-body8 text-gray2">
+        날짜: {dayjs().format('YYYY년 MM월 DD일 HH시 mm분')}
+      </div>
       {!!transcript && (
-        <div className={styles.transcript}>transcript: {transcript}</div>
+        <div className="px-20 text-body7">transcript: {transcript}</div>
       )}
       <VehicleInfo />
       <CustomerMemo />
-      <ExteriorCheck text={removeBlank} reset={resetTranscript} />
+      <ExteriorCheck text={clearBlank(transcript)} reset={resetTranscript} />
       <BaseCheck text={transcript} reset={resetTranscript} />
       <ManagerMemo />
       <Term />

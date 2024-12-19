@@ -1,5 +1,4 @@
 'use client';
-import styles from './baseCheck.module.css';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import EVIcon from '@/assets/icon/Type=EV.png';
@@ -72,25 +71,47 @@ export default function BaseCheck({ text, reset }: Props) {
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.card_wrapper}>
-        <div>기본 점검</div>
-        <ul>
+    <div className="px-20 pb-8">
+      <div className="rounded-lg">
+        <div className="border border-solid border-gray2 text-center bg-gray11 rounded-tl-lg rounded-tr-lg py-12 px-20 text-heading8 border-b border-b-gray7">
+          기본 점검
+        </div>
+        <ul className="block place-items-center grid-col-1 min-[272px]:grid min-[480px]:grid-cols-2 min-[720px]:grid-cols-3">
           {baseCheckList.map((item) => (
-            <li className={styles.check_unit_card} key={item.title}>
-              <div className={styles.left_wrapper}>
+            <li
+              className="flex flex-col gap-12 w-full h-full p-12 grid-cols-[22%_72%] overflow-x-auto
+              min-[272px]:grid 
+              border-b border-r border-solid border-gray7
+              max-[479px]:border-r-gray2 max-[479px]:border-l-gray2 max-[479px]:border-l
+              [&:nth-of-type(2n+1)]:max-[719px]:border-l-gray2 [&:nth-of-type(2n+1)]:max-[719px]:border-l 
+              [&:nth-of-type(3n+1)]:min-[720px]:border-l [&:nth-of-type(3n+1)]:border-l-gray2
+              [&:nth-of-type(3n+3)]:border-r [&:nth-of-type(3n+3)]:border-l-gray2 [&:nth-of-type(3n+3)]:min-[720px]:border-l-none
+              [&:nth-of-type(3n+3)]:min-[720px]:border-l-gray7
+              [&:nth-of-type(3n+3)]:min-[720px]:border-r [&:nth-of-type(3n+3)]:min-[720px]:border-r-gray2
+              [&:nth-of-type(2n+2)]:border-l-none [&:nth-of-type(2n+2)]:min-[720px]:border-r [&:nth-of-type(2n+2):max-[719px]:border-r-gray7 [&:nth-of-type(2n+2):max-[479px]:border-r-gray2
+              [&:nth-of-type(2n+2)]:min-[479px]:max-[719px]:border-r-gray2
+              [&:nth-last-of-type(-n+3):nth-of-type(3n)]:border-b [&:nth-last-of-type(-n+3):nth-of-type(3n)]:border-b-gray7 [&:nth-last-of-type(-n+3):nth-of-type(3n)]:min-[720px]:border-b-gray2
+              [&:last-of-type]:border-b [&:last-of-type]:border-r [&:last-of-type]:border-gray2 [&:last-of-type]:rounded-br-lg [&:last-of-type]:max-[479px]:rounded-bl-lg
+              [&:nth-last-of-type(2)]:min-[480px]:border-b-gray2 [&:nth-last-of-type(2)]:min-[480px]:rounded-bl-lg
+              "
+              key={item.title}
+            >
+              <div className="grid place-items-center gap-4">
                 {item.icon && (
                   <Image src={item.icon} alt={item.title} width={40} />
                 )}
-                <p>{item.title}</p>
+                <p className="text-body9_m text-center text-ellipsis">
+                  {item.title}
+                </p>
               </div>
-              <div className={styles.right_wrapper}>
-                <div>
+              <div>
+                <div className="flex items-center gap-8 max-[272px]:justify-center">
                   {item.checkList.map((v) => {
                     const type = item.title + v.label;
                     return (
-                      <div key={v.label}>
+                      <div key={v.label} className="flex items-center gap-4">
                         <input
+                          className="shrink-0 w-fit"
                           type="checkbox"
                           id={type}
                           name={type}
@@ -99,30 +120,41 @@ export default function BaseCheck({ text, reset }: Props) {
                             handleChange({ key: item.key, status: v.value })
                           }
                         />
-                        <label htmlFor={type}>{v.label}</label>
+                        <label className="text-body9" htmlFor={type}>
+                          {v.label}
+                        </label>
                       </div>
                     );
                   })}
                 </div>
-                <textarea className={styles.check_unit_textarea} />
+                <textarea className="bg-gray11 rounded-lg mt-12 w-full text-body8" />
               </div>
             </li>
           ))}
-          <div key="ev" className={styles.check_ev_card}>
-            <div>
-              <div className={styles.left_wrapper}>
+          <div
+            key="ev"
+            className="pt-4 pl-4 max-[719px]:col-span-full max-[719px]:p-0 max-[719px]:mt-8 w-full h-full "
+          >
+            <div className="grid gap-12 w-full h-full p-8 grid-cols-[22%_72%] border border-gray2 max-[719px]:rounded-lg min-[720px]:rounded-br-lg">
+              <div className="grid place-items-center gap-4">
                 <Image src={EVIcon} alt="EV" width={40} />
                 <p>xEV</p>
               </div>
-              <ul className={styles.ev_right_wrapper}>
+              <ul className="w-full [&>li:not(:last-of-type)]:pb-4 [&>li:not(:last-of-type)]:mb-4 [&>li:not(:last-of-type)]:border-b [&>li:not(:last-of-type)]:border-gray7">
                 {evCheckList.map((item) => (
-                  <li key={item.title}>
-                    <p>{item.title}</p>
-                    <div>
+                  <li
+                    key={item.title}
+                    className="flex items-center justify-between"
+                  >
+                    <p className="text-body9_m">{item.title}</p>
+                    <div className="flex items-center gap-8">
                       {item.checkList.map((v) => {
                         const type = item.title + v.label;
                         return (
-                          <div key={v.label}>
+                          <div
+                            key={v.label}
+                            className="flex items-center gap-4"
+                          >
                             <input
                               type="checkbox"
                               id={type}
@@ -132,7 +164,9 @@ export default function BaseCheck({ text, reset }: Props) {
                                 handleChange({ key: item.key, status: v.value })
                               }
                             />
-                            <label htmlFor={type}>{v.label}</label>
+                            <label htmlFor={type} className="text-body9">
+                              {v.label}
+                            </label>
                           </div>
                         );
                       })}

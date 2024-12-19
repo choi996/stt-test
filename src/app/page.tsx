@@ -1,14 +1,13 @@
 import 'regenerator-runtime/runtime';
-import styles from './page.module.css';
 import MainImage from '@/assets/images/main.png';
 import SpeedmateLogoImage from '@/assets/images/speedmate.png';
 import Image from 'next/image';
-import LoginForm from '@/app/_components/loginForm';
+import LoginForm from '@/app/_components/LoginForm';
 
 export default function Home() {
   return (
-    <div className={styles.page}>
-      <div className={styles.main_img_wrapper}>
+    <div className="w-full max-w-1024 my-0 mx-auto">
+      <div className="w-full relative aspect-[7/10]">
         <Image
           src={MainImage}
           priority
@@ -17,12 +16,12 @@ export default function Home() {
           style={{ objectFit: 'cover' }}
         />
       </div>
-      <div className={styles.title_wrapper}>
-        <div className={styles.title}>
-          <b>Speedmate Check-Mate</b>
-          <p>Trust your car to the experts</p>
+      <div className="absolute top-0 w-full">
+        <div className="py-20 px-16 bg-gray12">
+          <h1 className="text-heading3">Speedmate Check-Mate</h1>
+          <p className="text-body6 text-gray4">Trust your car to the experts</p>
         </div>
-        <div className={styles.speedmate}>
+        <div className="pt-20 px-20 pb-40 bg-gradient-to-b from-gray12 to-gray0">
           <Image
             src={SpeedmateLogoImage}
             alt="speedmate"

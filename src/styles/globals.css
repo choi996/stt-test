@@ -1,7 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+@layer base {
+  html {
+    @apply text-gray2;
+  }
+}
 html {
   --gray-scale-1: #000000;
   --gray-scale-2: #282a2e;
