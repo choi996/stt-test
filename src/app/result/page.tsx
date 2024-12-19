@@ -225,7 +225,7 @@ export default function ResultPage() {
           </section>
         </div>
       )}
-      <FloatBottomWrapper2 label="확인 완료" onClick={() => push('/talk')} />
+      <FloatBottomWrapper2 label="확인 완료" onClick={() => push('/term')} />
     </div>
   );
 }
