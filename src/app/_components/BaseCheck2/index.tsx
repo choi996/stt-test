@@ -21,6 +21,9 @@ export default function BaseCheck({ text, reset }: Props) {
   const [oilFocus, setOilFocus] = useState(false);
 
   useEffect(() => {
+    if(text === '엔진오일 메') {
+      return;
+    }
     if (
       (text.includes('엔진') || text.includes('오일')) &&
       text.includes('메모')
@@ -51,7 +54,8 @@ export default function BaseCheck({ text, reset }: Props) {
       !text.includes('오른쪽') &&
       !text.includes('전면') &&
       !text.includes('후면') &&
-      text.length > 4
+      text.length > 4 &&
+      !oilFocus
     ) {
       const getTranscript = async () => {
         try {
@@ -68,7 +72,12 @@ export default function BaseCheck({ text, reset }: Props) {
             setResult((prev) =>
               !prev ? newResult : { ...prev, ...newResult },
             );
-          
+           if(data.part_key === 'engine_oil' && data.check_status === 1) {
+            const oil_textarea = document.getElementById('engine_oil');
+
+            oil_textarea?.focus();
+            setOilFocus(true)
+           }
           }
           reset()
         } catch (error) {
