@@ -77,7 +77,7 @@ export const exteriorLeftCheck = (text: string, callback: () => void) => {
   const border = isCancel ? inActive : active;
 
   if (front.some((v) => text.includes(v))) {
-    if (text.includes('타이어')) {
+    if (text.includes('타이어') || text.includes('바퀴')) {
       isCatch = true;
       const div = document.getElementById('left_front_tire');
       if (!div) return;
@@ -95,7 +95,7 @@ export const exteriorLeftCheck = (text: string, callback: () => void) => {
       div.style.border = border;
     }
   } else if (rear.some((v) => text.includes(v))) {
-    if (text.includes('타이어')) {
+    if (text.includes('타이어') || text.includes('바퀴')) {
       isCatch = true;
       const div = document.getElementById('left_rear_tire');
       if (!div) return;
@@ -178,7 +178,7 @@ export const exteriorRightCheck = (text: string, callback: () => void) => {
   const border = isCancel ? inActive : active;
 
   if (front.some((v) => text.includes(v))) {
-    if (text.includes('타이어')) {
+    if (text.includes('타이어') || text.includes('바퀴')) {
       isCatch = true;
       const div = document.getElementById('right_front_tire');
       if (!div) return;
@@ -196,7 +196,7 @@ export const exteriorRightCheck = (text: string, callback: () => void) => {
       div.style.border = border;
     }
   } else if (rear.some((v) => text.includes(v))) {
-    if (text.includes('타이어')) {
+    if (text.includes('타이어') || text.includes('바퀴')) {
       isCatch = true;
       const div = document.getElementById('right_rear_tire');
       if (!div) return;

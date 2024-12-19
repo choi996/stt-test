@@ -68,8 +68,9 @@ export default function BaseCheck({ text, reset }: Props) {
             setResult((prev) =>
               !prev ? newResult : { ...prev, ...newResult },
             );
-            reset();
+          
           }
+          reset()
         } catch (error) {
           console.log(error);
         }
