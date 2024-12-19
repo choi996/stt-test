@@ -35,6 +35,7 @@ export default function Inspect() {
   const handleOnOff = () => {
     if (listening) {
       SpeechRecognition.stopListening();
+      resetTranscript();
     } else {
       SpeechRecognition.startListening({ continuous: true });
     }
