@@ -1,5 +1,5 @@
 import { MouseEvent, PropsWithChildren, useEffect, useState } from 'react';
-import Button from '../Button';
+import Button from '../Button2';
 
 interface Props extends PropsWithChildren {
   title: string;

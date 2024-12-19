@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
 import { useRef, useState } from 'react';
-import Alert from '../Alert';
-import SignatureCanvas from '../SignatureCanvas';
+import Alert from '../Alert2';
+import SignatureCanvas from '../SignatureCanvas2';
 
 export default function CustomerMemo() {
   const [isOpenAlert, setIsOpenAlert] = useState(false);

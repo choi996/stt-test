@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { useRef, useState } from 'react';
-import Alert from '../Alert';
-import SignatureCanvas from '../SignatureCanvas';
+import Alert from '../Alert2';
+import SignatureCanvas from '../SignatureCanvas2';
 
 export default function Term() {
   const [isOpenAlert, setIsOpenAlert] = useState(false);

@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import Button, { ButtonProps } from '../Button';
+import Button, { ButtonProps } from '../Button2';
 
 type FloatButtonWrapper = Pick<
   ButtonProps,

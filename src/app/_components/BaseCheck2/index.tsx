@@ -7,7 +7,6 @@ import { debounce } from '@/app/utils';
 import { CheckStatusTypes, PartKeyTypes } from '@/app/_lib/constants/types';
 import { QueryResponse } from '@/app/_lib/constants/interface';
 import { baseCheckList, evCheckList } from './checklist';
-import FloatBottomWrapper from '../FloatBottomWrapper';
 
 interface Props {
   text: string;
