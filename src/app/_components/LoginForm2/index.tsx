@@ -1,7 +1,7 @@
 'use client';
 import { useRouter } from 'next/navigation';
 import { ChangeEvent, FormEvent, useCallback, useState } from 'react';
-import Input from '../Input';
+import Input from '../Input2';
 import FloatBottomWrapper from '../FloatBottomWrapper2';
 import { clearBlank } from '@/app/_lib/utils';
 

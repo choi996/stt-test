@@ -2,7 +2,7 @@ import 'regenerator-runtime/runtime';
 import MainImage from '@/assets/images/main.png';
 import SpeedmateLogoImage from '@/assets/images/speedmate.png';
 import Image from 'next/image';
-import LoginForm from '@/app/_components/LoginForm';
+import LoginForm from '@/app/_components/LoginForm2';
 
 export default function Home() {
   return (
