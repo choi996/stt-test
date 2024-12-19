@@ -9,6 +9,7 @@ export default function ReadyPage() {
   const { back, push } = useRouter();
 
   const container = useRef<HTMLDivElement>(null);
+  const timer = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     lottie.loadAnimation({
@@ -19,9 +20,11 @@ export default function ReadyPage() {
       path: '/lottie/vehicle-loading.json',
     });
 
-    setTimeout(() => {
+    timer.current = setTimeout(() => {
       push('/result');
     }, 5000);
+
+    return () => clearTimeout(timer.current as NodeJS.Timeout);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

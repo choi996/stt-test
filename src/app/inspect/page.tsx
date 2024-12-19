@@ -63,7 +63,13 @@ export default function Inspect() {
         isSupportSpeechRecognition={browserSupportsSpeechRecognition}
         onClick={handleOnOff}
       />
-      <FloatBottomWrapper label="진단 완료" onClick={() => push('/ready')} />
+      <FloatBottomWrapper
+        label="진단 완료"
+        onClick={() => {
+          SpeechRecognition.stopListening();
+          push('/ready');
+        }}
+      />
     </div>
   );
 }
