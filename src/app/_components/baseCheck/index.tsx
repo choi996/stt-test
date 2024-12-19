@@ -7,6 +7,7 @@ import { debounce } from '@/app/utils';
 import { CheckStatusTypes, PartKeyTypes } from '@/app/_lib/constants/types';
 import { QueryResponse } from '@/app/_lib/constants/interface';
 import { baseCheckList, evCheckList } from './checklist';
+import FloatBottomWrapper from '../FloatBottomWrapper';
 
 interface Props {
   text: string;
@@ -17,8 +18,34 @@ type CheckTypes = { [key in PartKeyTypes]: CheckStatusTypes };
 
 export default function BaseCheck({ text, reset }: Props) {
   const [result, setResult] = useState<CheckTypes>();
+  const [oilMemo, setOilMemo] = useState('');
+  const [oilFocus, setOilFocus] = useState(false);
 
   useEffect(() => {
+    if (
+      (text.includes('엔진') || text.includes('오일')) &&
+      text.includes('메모')
+    ) {
+      reset();
+      setOilFocus(true);
+      const oil_textarea = document.getElementById('engine_oil');
+
+      oil_textarea?.focus();
+      return;
+    }
+
+    if (text && oilFocus) {
+      if (text.includes('완료')) {
+        setOilFocus(false);
+        const oil_textarea = document.getElementById('engine_oil');
+
+        oil_textarea?.blur();
+      }
+      setOilMemo(text.replace('완료', ''));
+
+      return;
+    }
+
     if (
       text &&
       !text.includes('왼쪽') &&
@@ -49,9 +76,6 @@ export default function BaseCheck({ text, reset }: Props) {
         }
       };
       debounce(() => getTranscript(), 1000);
-    }
-
-    if (text.includes('엔진') && text.includes('메모')) {
     }
   }, [text, reset]);
 
@@ -130,7 +154,18 @@ export default function BaseCheck({ text, reset }: Props) {
                     );
                   })}
                 </div>
-                <textarea className="bg-gray11 rounded-lg mt-12 w-full text-body8" />
+                <textarea
+                  id={item.key}
+                  className="bg-gray11 rounded-lg mt-12 w-full text-body8"
+                  value={item.key === 'engine_oil' ? oilMemo : ''}
+                  onChange={({ target: { value } }) =>
+                    item.key === 'engine_oil' ? setOilMemo(value) : undefined
+                  }
+                  onBlur={() => {
+                    reset();
+                    setOilFocus(false);
+                  }}
+                />
               </div>
             </li>
           ))}

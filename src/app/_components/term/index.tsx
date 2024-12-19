@@ -45,7 +45,7 @@ export default function Term() {
   };
 
   return (
-    <div>
+    <div className="pb-120">
       <ul
         className="pt-8 px-20 pb-20 
         [&>li]:flex [&>li]:gap-6 [&>li]:text-body11 [&>li]:text-gray3

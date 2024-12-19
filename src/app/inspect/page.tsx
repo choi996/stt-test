@@ -15,6 +15,7 @@ import ManagerMemo from '../_components/ManagerMemo';
 import Term from '../_components/Term';
 import Microphone from '../_components/Microphone';
 import ExteriorCheck from '../_components/ExteriorCheck';
+import FloatBottomWrapper from '../_components/FloatBottomWrapper';
 
 export default function Inspect() {
   const [isClient, setIsClient] = useState(false);
@@ -59,6 +60,7 @@ export default function Inspect() {
         isSupportSpeechRecognition={browserSupportsSpeechRecognition}
         onClick={handleOnOff}
       />
+      <FloatBottomWrapper label="진단 완료" />
     </div>
   );
 }
