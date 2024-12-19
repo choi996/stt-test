@@ -1,5 +1,4 @@
 import { MouseEvent, PropsWithChildren, useEffect, useState } from 'react';
-import styles from './alert.module.css';
 import Button from '../Button';
 
 interface Props extends PropsWithChildren {

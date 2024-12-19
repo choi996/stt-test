@@ -50,6 +50,9 @@ export default function BaseCheck({ text, reset }: Props) {
       };
       debounce(() => getTranscript(), 1000);
     }
+
+    if (text.includes('엔진') && text.includes('메모')) {
+    }
   }, [text, reset]);
 
   const handleChange = ({
