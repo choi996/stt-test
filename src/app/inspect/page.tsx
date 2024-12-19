@@ -16,8 +16,10 @@ import Term from '../_components/Term2';
 import Microphone from '../_components/Microphone2';
 import ExteriorCheck from '../_components/ExteriorCheck2';
 import FloatBottomWrapper from '../_components/FloatBottomWrapper2';
+import { useRouter } from 'next/navigation';
 
 export default function Inspect() {
+  const { push } = useRouter();
   const [isClient, setIsClient] = useState(false);
   const {
     transcript,
@@ -60,7 +62,7 @@ export default function Inspect() {
         isSupportSpeechRecognition={browserSupportsSpeechRecognition}
         onClick={handleOnOff}
       />
-      <FloatBottomWrapper label="진단 완료" />
+      <FloatBottomWrapper label="진단 완료" onClick={() => push('/ready')} />
     </div>
   );
 }

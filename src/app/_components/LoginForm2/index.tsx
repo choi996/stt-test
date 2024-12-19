@@ -28,7 +28,7 @@ export default function LoginForm() {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    push('/inspect');
+    push('/searchcar');
   };
 
   return (

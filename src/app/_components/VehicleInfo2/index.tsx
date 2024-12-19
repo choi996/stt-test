@@ -28,8 +28,6 @@ export default function VehicleInfo() {
 
     const clear = clearBlank(value);
 
-    console.log(clear, regex.carNumber.test(clear));
-
     setCarNumberError(!!clear && !regex.carNumber.test(clear));
 
     setCarNumber(clear);
@@ -55,22 +53,30 @@ export default function VehicleInfo() {
           [&>li>input]:mr-36 [&>li>input]:text-right"
       >
         <li className="border-b border-dotted md:border-none">
-          <p className="rounded-tl-lg md:rounded-bl-lg">차종</p>
-          <input value={type} onChange={handleChangeType} />
+          <p className="rounded-tl-lg md:rounded-bl-lg">매장</p>
+          <div className="text-body7 w-full text-right mr-24">
+            스피드메이트 종로 31점
+          </div>
         </li>
         <li className="border-b border-dotted md:border-none">
           <p>차량번호</p>
-          <input value={carNumber} onChange={handleChangeNumber} />
+          <div className="text-body7 w-full text-right mr-24">311가3131</div>
           {carNumberError && (
             <span className="absolute bottom-0 right-16 text-body11 text-systemRed2">
               차량번호를 확인해주세요
             </span>
           )}
         </li>
+        <li className="border-b border-dotted md:border-none">
+          <p className="rounded-tl-lg md:rounded-bl-lg">차종</p>
+          <div className="text-body7 w-full text-right mr-24">
+            BMW 3-series(F30)
+          </div>
+        </li>
         <li>
           <p className="rounded-bl-lg md:rounded-bl-none">주행거리</p>
-          <input value={distance} onChange={handleChangeDistance} />
-          <span className="absolute top-14 right-12 text-body7">km</span>
+          {/* <input value={distance} onChange={handleChangeDistance} /> */}
+          <span className="absolute top-14 right-24 text-body7">31,000km</span>
         </li>
       </ul>
     </div>

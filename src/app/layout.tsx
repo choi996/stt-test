@@ -39,7 +39,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={font.className}>{children}</body>
+      <body className={`${font.className} max-w-1024 mx-auto`}>{children}</body>
     </html>
   );
 }

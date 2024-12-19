@@ -12,6 +12,17 @@ module.exports = {
   ],
   theme: {
     extend: {
+      keyframes: {
+        notification: {
+          '0%': { opacity: '0' },
+          '20%': { opacity: '1' },
+          '80%': { opacity: '1' },
+          '100%': { opacity: '0' },
+        },
+      },
+      animation: {
+        notification: 'notification 3s forwards',
+      },
       zIndex: {
         dim: 900,
         alert: 1200,
@@ -35,6 +46,7 @@ module.exports = {
         331: '331px',
         374: '374px',
         398: '398px',
+        984: '984px',
         1024: '1024px',
       },
       colors: {
