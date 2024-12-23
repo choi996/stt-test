@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
 import { useRef, useState } from 'react';
-import Alert from '../Alert2';
-import SignatureCanvas from '../SignatureCanvas2';
+import Alert from '../Alert';
+import SignatureCanvas from '../SignatureCanvas';
 
 export default function CustomerMemo() {
   const [isOpenAlert, setIsOpenAlert] = useState(false);
@@ -63,7 +63,7 @@ export default function CustomerMemo() {
       </div>
     );
   };
-  
+
   return (
     <div className="pt-0 px-20 pb-8">
       <div className="border border-solid border-gray2 rounded-lg flex">

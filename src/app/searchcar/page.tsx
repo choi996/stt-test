@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { ChangeEvent, useState } from 'react';
 import { clearBlank } from '../_lib/utils';
 import { regex } from '../_lib/constants/strings';
-import FloatBottomWrapper2 from '../_components/FloatBottomWrapper2';
+import FloatBottomWrapper2 from '../_components/FloatBottomWrapper';
 import Snackbar from '../_components/Snackbar';
 
 export default function SearchCarPage() {

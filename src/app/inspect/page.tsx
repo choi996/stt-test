@@ -5,17 +5,17 @@ import SpeechRecognition, {
 } from 'react-speech-recognition';
 import { useEffect, useState } from 'react';
 
-import CustomerMemo from '@/app/_components/CustomerMemo2';
-import BaseCheck from '@/app/_components/BaseCheck2';
+import CustomerMemo from '@/app/_components/CustomerMemo';
+import BaseCheck from '@/app/_components/BaseCheck';
 import { clearBlank } from '../_lib/utils';
 import dayjs from 'dayjs';
-import Header from '../_components/Header2';
-import VehicleInfo from '../_components/VehicleInfo2';
-import ManagerMemo from '../_components/ManagerMemo2';
-import Term from '../_components/Term2';
-import Microphone from '../_components/Microphone2';
-import ExteriorCheck from '../_components/ExteriorCheck2';
-import FloatBottomWrapper from '../_components/FloatBottomWrapper2';
+import Header from '../_components/Header';
+import VehicleInfo from '../_components/VehicleInfo';
+import ManagerMemo from '../_components/ManagerMemo';
+import Term from '../_components/Term';
+import Microphone from '../_components/Microphone';
+import ExteriorCheck from '../_components/ExteriorCheck';
+import FloatBottomWrapper from '../_components/FloatBottomWrapper';
 import { useRouter } from 'next/navigation';
 
 export default function Inspect() {

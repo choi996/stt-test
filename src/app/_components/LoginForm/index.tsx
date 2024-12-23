@@ -1,8 +1,8 @@
 'use client';
 import { useRouter } from 'next/navigation';
 import { ChangeEvent, FormEvent, useCallback, useState } from 'react';
-import Input from '../Input2';
-import FloatBottomWrapper from '../FloatBottomWrapper2';
+import Input from '../Input';
+import FloatBottomWrapper from '../FloatBottomWrapper';
 import { clearBlank } from '@/app/_lib/utils';
 
 export default function LoginForm() {

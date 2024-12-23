@@ -16,7 +16,7 @@ import WarnIcon from '@/assets/icon/result/warn.svg';
 import TireIcon from '@/assets/icon/tire.svg';
 import BatteryIcon from '@/assets/icon/battery.svg';
 import OilIcon from '@/assets/icon/oil.svg';
-import FloatBottomWrapper2 from '../_components/FloatBottomWrapper2';
+import FloatBottomWrapper2 from '../_components/FloatBottomWrapper';
 import { useHash } from '../_lib/hooks/useHash';
 
 export default function ResultPage() {

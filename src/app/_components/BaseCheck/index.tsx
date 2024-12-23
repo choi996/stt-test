@@ -60,7 +60,7 @@ export default function BaseCheck({ text, reset }: Props) {
       const getTranscript = async () => {
         try {
           const { data } = await axios.post<QueryResponse>(
-            'https://1924-206-219-44-244.ngrok-free.app/query',
+            'https://8762-206-219-44-244.ngrok-free.app/query',
             {
               text,
             },

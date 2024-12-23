@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { useRef, useState } from 'react';
-import Alert from '../Alert2';
-import SignatureCanvas from '../SignatureCanvas2';
+import Alert from '../Alert';
+import SignatureCanvas from '../SignatureCanvas';
 
 export default function Term() {
   const [isOpenAlert, setIsOpenAlert] = useState(false);
@@ -91,7 +91,7 @@ export default function Term() {
                 alt="서명"
               />
             ) : (
-              <button className="text-body11 text-gray5">
+              <button className="text-body11 text-gray5 ml-12">
                 위 내용에 동의합니다.
               </button>
             )}

@@ -112,7 +112,10 @@ export default function SignatureCanvas({ canvasRef }: Props) {
   };
 
   return (
-    <div className={styles.container} ref={containerRef}>
+    <div
+      className="w-full rounded-md max-h-240 bg-gray11 relative overscroll-none"
+      ref={containerRef}
+    >
       <canvas
         ref={canvasRef}
         onMouseDown={handleMouseDown}

@@ -38,8 +38,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko">
-      <body className={`${font.className} max-w-1024 mx-auto`}>{children}</body>
+    <html lang="ko" className="h-dvh">
+      <body className={`${font.className} h-full max-w-1024 mx-auto`}>
+        {children}
+      </body>
     </html>
   );
 }
