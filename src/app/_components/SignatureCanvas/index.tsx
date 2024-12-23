@@ -7,7 +7,6 @@ import {
   useRef,
   useState,
 } from 'react';
-import styles from './signature.module.css';
 
 interface Props {
   canvasRef: RefObject<HTMLCanvasElement>;
