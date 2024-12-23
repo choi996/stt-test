@@ -25,10 +25,16 @@ export default function ExteriorCheck({ text, reset }: Props) {
         text.includes('정면') ||
         text.includes('정년') ||
         text.includes('전면') ||
+        text.includes('헤드') ||
         bonnet.some((v) => text.includes(v))
       ) {
         exteriorFrontCheck(text, reset);
-      } else if (text.includes('후면') || text.includes('트렁크')) {
+      } else if (
+        text.includes('후면') ||
+        text.includes('트렁크') ||
+        text.includes('테일') ||
+        text.includes('후미')
+      ) {
         exteriorRearCheck(text, reset);
       } else if (text.includes('왼쪽')) {
         exteriorLeftCheck(text, reset);
