@@ -51,7 +51,7 @@ export default function ExteriorCheck({ text, reset }: Props) {
     if (isInActive) {
       target.style.border = '1px solid red';
     } else {
-      target.style.border = '1px dotted var(--gray-scale-2)';
+      target.style.border = '1px dotted #282A2E';
     }
   };
 
