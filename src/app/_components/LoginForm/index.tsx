@@ -4,6 +4,7 @@ import { ChangeEvent, FormEvent, useCallback, useState } from 'react';
 import Input from '../Input';
 import FloatBottomWrapper from '../FloatBottomWrapper';
 import { clearBlank } from '@/app/_lib/utils';
+import Link from 'next/link';
 
 export default function LoginForm() {
   const { push } = useRouter();
@@ -50,6 +51,11 @@ export default function LoginForm() {
             value={password}
             onChange={handleChangePassword}
           />
+          <Link href={'/stt-test'}>
+            <div className=" p-12 w-fit rounded-lg text-button4 mt-16 bg-gray11">
+              STT API별 성능 테스트
+            </div>
+          </Link>
         </div>
       </div>
       <FloatBottomWrapper label="로그인" disabled={!code || !password} />

@@ -109,7 +109,7 @@ export default function BaseCheck({ text, reset }: Props) {
   return (
     <div className="px-20 pb-8">
       <div className="rounded-lg">
-        <div className="border border-solid border-gray2 text-center bg-gray11 rounded-tl-lg rounded-tr-lg py-12 px-20 text-heading8 border-b border-b-gray7">
+        <div className="border border-solid border-`gray2` text-center bg-gray11 rounded-tl-lg rounded-tr-lg py-12 px-20 text-heading8 border-b border-b-gray7">
           기본 점검
         </div>
         <ul className="block place-items-center grid-col-1 min-[272px]:grid min-[480px]:grid-cols-2 min-[720px]:grid-cols-3">

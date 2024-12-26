@@ -19,6 +19,7 @@ export default function Button({
   color = 'primary',
   label,
   size = 56,
+  className,
   ...rest
 }: ButtonProps) {
   const sizeClasses = useMemo(() => {
@@ -58,7 +59,7 @@ export default function Button({
   return (
     <button
       className={`${sizeClasses} ${colorClasses} rounded-lg transition-colors duration-300 
-    disabled:bg-gray7 disabled:text-gray12 ${isFull ? 'w-full' : 'w-fit'}`}
+    disabled:bg-gray7 disabled:text-gray12 ${isFull ? 'w-full' : 'w-fit'} ${className}`}
       {...rest}
     >
       {label}
