@@ -34,9 +34,6 @@ export default function SttTestPage() {
     amazonCloseSocket();
   };
 
-  console.log('###NEXT_PUBLIC_API_URL###', process.env.NEXT_PUBLIC_API_URL);
-  console.log('###API_URL###', process.env.API_URL);
-
   const isOn =
     listening ||
     microphone?.state === 'recording' ||
