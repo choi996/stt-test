@@ -54,7 +54,7 @@ function AmazonTranscribeContextProvider({
 
     setAmazonTranscribeState(AmazonTranscribeStateType.CONNECTING);
 
-    const ioSocket = io('http://localhost:8000/amazon'); // Socket.IO 서버 연결
+    const ioSocket = io(`${process.env.NEXT_PUBLIC_API_URL}/amazon`); // Socket.IO 서버 연결
     socket.current = ioSocket;
 
     ioSocket.on('connect', async () => {

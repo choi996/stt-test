@@ -51,7 +51,7 @@ function GoogleCloudContextProvider({
 
     setGoogleCloudState(GoogleCloudStateType.CONNECTING);
 
-    const ioSocket = io('http://localhost:8000/google'); // Socket.IO 서버 연결
+    const ioSocket = io(`${process.env.NEXT_PUBLIC_API_URL}/google`); // Socket.IO 서버 연결
     socket.current = ioSocket;
 
     ioSocket.on('connect', async () => {
