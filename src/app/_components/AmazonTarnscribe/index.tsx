@@ -1,28 +1,23 @@
 import Button from '../Button';
-import { useGoogleCloud } from '@/app/_lib/context/GoogleCloudContextProvider';
+import { useAmazonTranscribe } from '@/app/_lib/context/AmazonTranscribeContextProvider';
 
-export default function GoogleCloud() {
-  const { transcript, setupSocket, reset } = useGoogleCloud();
+export default function AmazonTranscribe() {
+  const { transcript, setupSocket, reset } = useAmazonTranscribe();
 
   return (
-    <div className="border-b border-gray9 pb-20 px-20">
+    <div className="px-20">
       <ul className="mb-16">
         <li className="flex items-start mb-8">
           <p className="w-80 text-gray4 text-body7">구현</p>
           <p className="text-body7_m">socket, javascript SDK (server)</p>
         </li>
         <li className="flex items-start mb-8">
-          <p className="w-80 text-gray4 text-body7">모델</p>
-          <p className="text-body7_m">default (권장)</p>
-        </li>
-        <li className="flex items-start mb-8">
           <p className="w-80 text-gray4 text-body7 min-w-80">가격</p>
           <div>
             <p className="text-body7_m">$0.024 (per minute)</p>
-            <p className="text-body7_m text-gray4">
-              $300 credit (90일 동안 사용 가능), 60분 무료 음성 인식 제공 (per
-              month)
-            </p>
+            <p className="text-body7_m text-gray4">T1(처음 250,000분) $0.024</p>
+            <p className="text-body7_m text-gray4">T2(다음 750,000분) $0.015</p>
+            <p className="text-body7_m text-gray4">이후 $0.0102</p>
           </div>
         </li>
         <li className="flex items-start mb-8">
@@ -31,7 +26,7 @@ export default function GoogleCloud() {
         </li>
         <li className="flex items-center">
           <p className="w-80 text-gray4 text-body7 ">성능</p>
-          <p className="text-body7_m text-systemRed1 bg-systemRed6">상</p>
+          <p className="text-body7_m">중</p>
         </li>
       </ul>
       <Button label="start" size={32} onClick={setupSocket} />

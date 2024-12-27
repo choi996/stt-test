@@ -27,16 +27,13 @@ export default function ReactSpeechRecognition() {
       </ul>
       <Button
         label="start"
-        isFull={false}
         disabled={listening}
         size={32}
-        color="gray"
         onClick={startTranscript}
       />
       <Button
         className="ml-8"
         label="reset"
-        isFull={false}
         size={32}
         color="gray"
         isGhost

@@ -12,24 +12,33 @@ import { useReactSpeech } from '../_lib/context/ReactSpeechContextProvider';
 import ReactSpeechRecognition from '../_components/ReactSpeechRecognition';
 import FloatBottomWrapper from '../_components/FloatBottomWrapper';
 import Accordion from '../_components/Accordion';
+import TranscribePage from '../_components/AmazonTarnscribe';
+import {
+  AmazonTranscribeStateType,
+  useAmazonTranscribe,
+} from '../_lib/context/AmazonTranscribeContextProvider';
 
 export default function SttTestPage() {
   const { stopMicrophone, microphone } = useMicrophone();
   const { disconnectFromDeepgram } = useDeepgram();
   const { listening, stopTranscript } = useReactSpeech();
   const { googleCloudState, closeSocket } = useGoogleCloud();
+  const { amazonTranscribeState, closeSocket: amazonCloseSocket } =
+    useAmazonTranscribe();
 
   const handleStop = () => {
     stopMicrophone();
     disconnectFromDeepgram();
     closeSocket();
     stopTranscript();
+    amazonCloseSocket();
   };
 
   const isOn =
     listening ||
     microphone?.state === 'recording' ||
-    googleCloudState === GoogleCloudStateType.CONNECTING;
+    googleCloudState === GoogleCloudStateType.CONNECTING ||
+    amazonTranscribeState === AmazonTranscribeStateType.CONNECTING;
 
   return (
     <>
@@ -39,14 +48,17 @@ export default function SttTestPage() {
             마이크 사용중.....
           </p>
         )}
-        <Accordion title="Deepgram AI" defaultValue>
-          <Deepgram />
+        <Accordion title="Google Cloud STT" defaultValue>
+          <GoogleCloud />
         </Accordion>
         <Accordion title="React Speech Recognition">
           <ReactSpeechRecognition />
         </Accordion>
-        <Accordion title="Google Cloud STT">
-          <GoogleCloud />
+        <Accordion title="Amazon Transcribe">
+          <TranscribePage />
+        </Accordion>
+        <Accordion title="Deepgram AI">
+          <Deepgram />
         </Accordion>
       </div>
       <FloatBottomWrapper disabled={!isOn} label="stop" onClick={handleStop} />

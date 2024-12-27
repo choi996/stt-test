@@ -74,7 +74,6 @@ export default function Deepgram() {
 
     const onTranscript = (data: LiveTranscriptionEvent) => {
       const { is_final: isFinal, speech_final: speechFinal } = data;
-
       const thisCaption = data.channel.alternatives[0].transcript;
 
       if (thisCaption !== '' && isFinal && speechFinal) {
@@ -150,17 +149,10 @@ export default function Deepgram() {
         </li>
       </ul>
       <div className="flex items-center">
-        <Button
-          label="start"
-          isFull={false}
-          size={32}
-          color="gray"
-          onClick={setupMicrophone}
-        />
+        <Button label="start" size={32} onClick={setupMicrophone} />
         <Button
           className="ml-8"
           label="reset"
-          isFull={false}
           size={32}
           color="gray"
           isGhost

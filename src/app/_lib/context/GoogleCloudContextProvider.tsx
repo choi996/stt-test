@@ -51,7 +51,7 @@ function GoogleCloudContextProvider({
 
     setGoogleCloudState(GoogleCloudStateType.CONNECTING);
 
-    const ioSocket = io('http://localhost:8000'); // Socket.IO 서버 연결
+    const ioSocket = io('http://localhost:8000/google'); // Socket.IO 서버 연결
     socket.current = ioSocket;
 
     ioSocket.on('connect', async () => {
@@ -137,7 +137,6 @@ function GoogleCloudContextProvider({
     });
 
     ioSocket.on('transcript', (data: { transcript: string }) => {
-      console.log('###', data.transcript);
       setTranscript(data.transcript);
     });
 
@@ -165,6 +164,7 @@ function GoogleCloudContextProvider({
 
   const reset = () => {
     setTranscript('');
+
     closeSocket();
   };
 

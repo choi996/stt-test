@@ -51,10 +51,11 @@ export default function LoginForm() {
             value={password}
             onChange={handleChangePassword}
           />
-          <Link href={'/stt-test'}>
-            <div className=" p-12 w-fit rounded-lg text-button4 mt-16 bg-gray11">
-              STT API별 성능 테스트
-            </div>
+          <Link
+            className="mt-12 w-fit text-button4 underline text-systemBlue1"
+            href={'/stt-test'}
+          >
+            STT API별 성능 테스트
           </Link>
         </div>
       </div>

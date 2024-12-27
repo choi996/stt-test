@@ -14,7 +14,7 @@ export type ButtonProps = {
 >;
 
 export default function Button({
-  isFull = true,
+  isFull = false,
   isGhost,
   color = 'primary',
   label,
