@@ -7,7 +7,7 @@ import Header from '../_components/Header';
 import { PATH } from '../_lib/router';
 
 export default function ReadyPage() {
-  const { back, push } = useRouter();
+  const { push } = useRouter();
 
   const container = useRef<HTMLDivElement>(null);
   const timer = useRef<NodeJS.Timeout | null>(null);

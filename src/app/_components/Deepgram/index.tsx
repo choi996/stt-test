@@ -92,6 +92,7 @@ export default function Deepgram() {
       // prettier-ignore
       connection.removeListener(LiveTranscriptionEvents.Transcript, onTranscript);
       microphone.removeEventListener(MicrophoneEvents.DataAvailable, onData);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       clearTimeout(captionTimeout.current as NodeJS.Timeout);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
