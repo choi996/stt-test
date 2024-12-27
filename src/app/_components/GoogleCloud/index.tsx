@@ -1,8 +1,11 @@
 import Button from '../Button';
-import { useGoogleCloud } from '@/app/_lib/context/GoogleCloudContextProvider';
+import {
+  GoogleCloudStateType,
+  useGoogleCloud,
+} from '@/app/_lib/context/GoogleCloudContextProvider';
 
 export default function GoogleCloud() {
-  const { transcript, setupSocket, reset } = useGoogleCloud();
+  const { transcript, googleCloudState, setupSocket, reset } = useGoogleCloud();
 
   return (
     <div className="border-b border-gray9 pb-20 px-20">
@@ -34,7 +37,12 @@ export default function GoogleCloud() {
           <p className="text-body7_m text-systemRed1 bg-systemRed6">상</p>
         </li>
       </ul>
-      <Button label="start" size={32} onClick={setupSocket} />
+      <Button
+        label="start"
+        size={32}
+        disabled={googleCloudState === GoogleCloudStateType.CONNECTING}
+        onClick={setupSocket}
+      />
       <Button
         className="ml-8"
         label="reset"

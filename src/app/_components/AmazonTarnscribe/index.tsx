@@ -1,8 +1,12 @@
 import Button from '../Button';
-import { useAmazonTranscribe } from '@/app/_lib/context/AmazonTranscribeContextProvider';
+import {
+  AmazonTranscribeStateType,
+  useAmazonTranscribe,
+} from '@/app/_lib/context/AmazonTranscribeContextProvider';
 
 export default function AmazonTranscribe() {
-  const { transcript, setupSocket, reset } = useAmazonTranscribe();
+  const { transcript, amazonTranscribeState, setupSocket, reset } =
+    useAmazonTranscribe();
 
   return (
     <div className="px-20">
@@ -29,7 +33,14 @@ export default function AmazonTranscribe() {
           <p className="text-body7_m">중</p>
         </li>
       </ul>
-      <Button label="start" size={32} onClick={setupSocket} />
+      <Button
+        label="start"
+        size={32}
+        disabled={
+          amazonTranscribeState === AmazonTranscribeStateType.CONNECTING
+        }
+        onClick={setupSocket}
+      />
       <Button
         className="ml-8"
         label="reset"

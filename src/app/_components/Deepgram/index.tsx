@@ -149,7 +149,12 @@ export default function Deepgram() {
         </li>
       </ul>
       <div className="flex items-center">
-        <Button label="start" size={32} onClick={setupMicrophone} />
+        <Button
+          label="start"
+          size={32}
+          disabled={microphone?.state === 'recording'}
+          onClick={setupMicrophone}
+        />
         <Button
           className="ml-8"
           label="reset"
