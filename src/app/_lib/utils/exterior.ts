@@ -1,10 +1,4 @@
-import {
-  bonnet,
-  front,
-  lamp,
-  rear,
-  sideMirror,
-} from '@/app/_lib/constants/strings';
+import { bonnet, front, lamp, rear, sideMirror } from '../constants/strings';
 
 export const exteriorFrontCheck = (text: string, callback: () => void) => {
   let isCatch = false;
@@ -220,12 +214,4 @@ export const exteriorRightCheck = (text: string, callback: () => void) => {
       callback();
     }, 1000);
   }
-};
-
-let timer: NodeJS.Timeout | null = null;
-export const debounce = (func: () => void, wait = 500) => {
-  if (timer) {
-    clearTimeout(timer);
-  }
-  timer = setTimeout(func, wait);
 };

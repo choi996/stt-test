@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import lottie from 'lottie-web';
+import { PATH } from '../_lib/router';
 
 export default function ReadyPage() {
   const { back, push } = useRouter();
@@ -31,7 +32,7 @@ export default function ReadyPage() {
   useEffect(() => {
     if (loading) {
       setTimeout(() => {
-        push('/talk');
+        push(PATH.TALK);
       }, 5000);
     }
   }, [loading, push]);

@@ -1,16 +1,16 @@
 'use client';
 
-import ArrowLeft from '@/assets/icon/arrow-left.svg';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useCallback, useState } from 'react';
 import { clearBlank } from '../_lib/utils';
 import { regex } from '../_lib/constants/strings';
-import FloatBottomWrapper2 from '../_components/FloatBottomWrapper';
+import FloatBottomWrapper from '../_components/FloatBottomWrapper';
 import Snackbar from '../_components/Snackbar';
+import { PATH } from '../_lib/router';
+import Header from '../_components/Header';
 
 export default function SearchCarPage() {
-  const { back, push } = useRouter();
+  const { push } = useRouter();
 
   const [carNumber, setCarNumber] = useState('');
   const [carNumberError, setCarNumberError] = useState(false);
@@ -25,12 +25,21 @@ export default function SearchCarPage() {
     setCarNumber(clear);
   };
 
+  const handleSearch = useCallback(() => {
+    setIsVisible(true);
+
+    setTimeout(() => {
+      if (carNumber === '311가3131') {
+        push(PATH.INSPECT);
+      } else {
+        setIsVisible(false);
+      }
+    }, 3000);
+  }, [push, carNumber]);
+
   return (
     <div>
-      <header className="py-16 px-20">
-        <Image src={ArrowLeft} alt="left" onClick={() => back()} />
-      </header>
-
+      <Header />
       <div className="py-24 px-20">
         <h3 className="text-heading3 mb-32">
           진단할 고객 차량 번호를
@@ -64,20 +73,10 @@ export default function SearchCarPage() {
         }
         status={carNumber === '311가3131' ? 'success' : 'error'}
       />
-      <FloatBottomWrapper2
+      <FloatBottomWrapper
         label="조회하기"
         disabled={carNumberError || !carNumber}
-        onClick={() => {
-          setIsVisible(true);
-
-          setTimeout(() => {
-            if (carNumber === '311가3131') {
-              push('/inspect');
-            } else {
-              setIsVisible(false);
-            }
-          }, 3000);
-        }}
+        onClick={handleSearch}
       />
     </div>
   );

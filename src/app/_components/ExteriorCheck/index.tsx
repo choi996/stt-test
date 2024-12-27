@@ -5,13 +5,14 @@ import Left from '@/assets/images/vehicle_left.png';
 import Right from '@/assets/images/vehicle_right.png';
 import Image from 'next/image';
 import { MouseEvent, useEffect } from 'react';
+
+import { bonnet } from '@/app/_lib/constants/strings';
 import {
   exteriorFrontCheck,
   exteriorLeftCheck,
   exteriorRearCheck,
   exteriorRightCheck,
-} from '@/app/utils';
-import { bonnet } from '@/app/_lib/constants/strings';
+} from '@/app/_lib/utils/exterior';
 
 interface Props {
   text: string;

@@ -9,7 +9,6 @@ import CustomerMemo from '@/app/_components/CustomerMemo';
 import BaseCheck from '@/app/_components/BaseCheck';
 import { clearBlank } from '../_lib/utils';
 import dayjs from 'dayjs';
-import Header from '../_components/Header';
 import VehicleInfo from '../_components/VehicleInfo';
 import ManagerMemo from '../_components/ManagerMemo';
 import Term from '../_components/Term';
@@ -17,6 +16,8 @@ import Microphone from '../_components/Microphone';
 import ExteriorCheck from '../_components/ExteriorCheck';
 import FloatBottomWrapper from '../_components/FloatBottomWrapper';
 import { useRouter } from 'next/navigation';
+import MainHeader from '../_components/Header/MainHeader';
+import { PATH } from '../_lib/router';
 
 export default function Inspect() {
   const { push } = useRouter();
@@ -45,7 +46,7 @@ export default function Inspect() {
 
   return (
     <div className="w-full max-w-1024 my-0 mx-auto">
-      <Header />
+      <MainHeader />
       <div className="py-16 px-20 w-full flex justify-end text-body8 text-gray2">
         날짜: {dayjs().format('YYYY년 MM월 DD일 HH시 mm분')}
       </div>
@@ -67,7 +68,7 @@ export default function Inspect() {
         label="진단 완료"
         onClick={() => {
           SpeechRecognition.stopListening();
-          push('/ready');
+          push(PATH.READY);
         }}
       />
     </div>

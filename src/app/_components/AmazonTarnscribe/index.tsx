@@ -30,7 +30,7 @@ export default function AmazonTranscribe() {
         </li>
         <li className="flex items-center">
           <p className="w-80 text-gray4 text-body7 ">성능</p>
-          <p className="text-body7_m">중</p>
+          <p className="text-body7_m">중하</p>
         </li>
       </ul>
       <Button

@@ -5,6 +5,7 @@ import Input from '../Input';
 import FloatBottomWrapper from '../FloatBottomWrapper';
 import { clearBlank } from '@/app/_lib/utils';
 import Link from 'next/link';
+import { PATH } from '@/app/_lib/router';
 
 export default function LoginForm() {
   const { push } = useRouter();
@@ -29,7 +30,7 @@ export default function LoginForm() {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    push('/searchcar');
+    push(PATH.SEARCHCAR);
   };
 
   return (

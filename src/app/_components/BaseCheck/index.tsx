@@ -3,10 +3,10 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import EVIcon from '@/assets/icon/Type=EV.png';
 import axios from 'axios';
-import { debounce } from '@/app/utils';
 import { CheckStatusTypes, PartKeyTypes } from '@/app/_lib/constants/types';
 import { QueryResponse } from '@/app/_lib/constants/interface';
 import { baseCheckList, evCheckList } from './checklist';
+import { debounce } from '@/app/_lib/utils';
 
 interface Props {
   text: string;

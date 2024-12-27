@@ -16,12 +16,18 @@ import WarnIcon from '@/assets/icon/result/warn.svg';
 import TireIcon from '@/assets/icon/tire.svg';
 import BatteryIcon from '@/assets/icon/battery.svg';
 import OilIcon from '@/assets/icon/oil.svg';
-import FloatBottomWrapper2 from '../_components/FloatBottomWrapper';
+import FloatBottomWrapper from '../_components/FloatBottomWrapper';
 import { useHash } from '../_lib/hooks/useHash';
+import { PATH } from '../_lib/router';
+import { useCallback } from 'react';
 
 export default function ResultPage() {
   const { push } = useRouter();
   const hash = useHash();
+
+  const handleClick = useCallback(() => {
+    push(PATH.CRM);
+  }, [push]);
 
   return (
     <div>
@@ -218,7 +224,7 @@ export default function ResultPage() {
           </section>
         </div>
       )}
-      <FloatBottomWrapper2 label="확인 완료" onClick={() => push('/term')} />
+      <FloatBottomWrapper label="확인 완료" onClick={handleClick} />
     </div>
   );
 }

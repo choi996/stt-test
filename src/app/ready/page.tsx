@@ -1,9 +1,10 @@
 'use client';
-import ArrowLeft from '@/assets/icon/arrow-left.svg';
-import Image from 'next/image';
+
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef } from 'react';
 import lottie from 'lottie-web';
+import Header from '../_components/Header';
+import { PATH } from '../_lib/router';
 
 export default function ReadyPage() {
   const { back, push } = useRouter();
@@ -21,7 +22,7 @@ export default function ReadyPage() {
     });
 
     timer.current = setTimeout(() => {
-      push('/result');
+      push(PATH.RESULT);
     }, 5000);
 
     return () => clearTimeout(timer.current as NodeJS.Timeout);
@@ -31,9 +32,7 @@ export default function ReadyPage() {
 
   return (
     <div>
-      <header className="py-16 px-20">
-        <Image src={ArrowLeft} alt="left" onClick={() => back()} />
-      </header>
+      <Header />
       <div className="py-24 px-20">
         <h3 className="text-heading3 mb-32">진단정보 분석중...</h3>
         <div ref={container} className="h-300" />
