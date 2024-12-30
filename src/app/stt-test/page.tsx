@@ -12,11 +12,16 @@ import { useReactSpeech } from '../_lib/context/ReactSpeechContextProvider';
 import ReactSpeechRecognition from '../_components/ReactSpeechRecognition';
 import FloatBottomWrapper from '../_components/FloatBottomWrapper';
 import Accordion from '../_components/Accordion';
-import TranscribePage from '../_components/AmazonTarnscribe';
+import AmazonTarnscribe from '../_components/AmazonTarnscribe';
 import {
   AmazonTranscribeStateType,
   useAmazonTranscribe,
 } from '../_lib/context/AmazonTranscribeContextProvider';
+import AzureSpeech from '../_components/AzureSpeech';
+import {
+  AzureSpeechStateType,
+  useAzureSpeech,
+} from '../_lib/context/AzureSpeechContextProvider';
 
 export default function SttTestPage() {
   const { stopMicrophone, microphone } = useMicrophone();
@@ -25,6 +30,8 @@ export default function SttTestPage() {
   const { googleCloudState, closeSocket } = useGoogleCloud();
   const { amazonTranscribeState, closeSocket: amazonCloseSocket } =
     useAmazonTranscribe();
+  const { azureSpeechState, stopTranscript: azureSpeechStop } =
+    useAzureSpeech();
 
   const handleStop = () => {
     stopMicrophone();
@@ -32,13 +39,15 @@ export default function SttTestPage() {
     closeSocket();
     stopTranscript();
     amazonCloseSocket();
+    azureSpeechStop();
   };
 
   const isOn =
     listening ||
     microphone?.state === 'recording' ||
     googleCloudState === GoogleCloudStateType.CONNECTING ||
-    amazonTranscribeState === AmazonTranscribeStateType.CONNECTING;
+    amazonTranscribeState === AmazonTranscribeStateType.CONNECTING ||
+    azureSpeechState === AzureSpeechStateType.CONNECTING;
 
   return (
     <>
@@ -48,14 +57,17 @@ export default function SttTestPage() {
             마이크 사용중.....
           </p>
         )}
-        <Accordion title="Google Cloud STT" defaultValue>
+        <Accordion title="Azure Speech AI" defaultValue>
+          <AzureSpeech />
+        </Accordion>
+        <Accordion title="Google Cloud STT">
           <GoogleCloud />
         </Accordion>
         <Accordion title="React Speech Recognition">
           <ReactSpeechRecognition />
         </Accordion>
         <Accordion title="Amazon Transcribe">
-          <TranscribePage />
+          <AmazonTarnscribe />
         </Accordion>
         <Accordion title="Deepgram AI">
           <Deepgram />

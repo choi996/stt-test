@@ -158,7 +158,7 @@ function useAmazonTranscribe(): AmazonTranscribeContextType {
 
   if (context === undefined) {
     throw new Error(
-      'useGoogleCloud must be used within a GoogleCloudContextProvider',
+      'useGoogleCloud must be used within a AmazonTranscribeContextProvider',
     );
   }
   return context;
