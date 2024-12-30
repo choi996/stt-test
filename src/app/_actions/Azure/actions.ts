@@ -17,7 +17,9 @@ export async function getAzureSpeechToken() {
     };
   } else {
     try {
-      const res = await fetch(`http://localhost:3000/api/azure/authenticate`);
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_HOST}/api/azure/authenticate`,
+      );
 
       const data = await res.json();
 
