@@ -126,10 +126,13 @@ function AzureSpeechContextProvider({
         tokenObj.authToken,
         tokenObj.region,
       );
+      console.log('##SpeechConfig::', speechConfig);
       speechConfig.speechRecognitionLanguage = 'ko-KR';
 
       const audioConfig = AudioConfig.fromDefaultMicrophoneInput();
+      console.log('##AudioConfig::', audioConfig);
       recognizer.current = new SpeechRecognizer(speechConfig, audioConfig);
+      console.log('##Recognizer::', recognizer.current);
       const phraseListGrammar = PhraseListGrammar.fromRecognizer(
         recognizer.current,
       );

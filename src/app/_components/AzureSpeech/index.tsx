@@ -9,7 +9,7 @@ export default function AzureSpeech() {
     useAzureSpeech();
 
   return (
-    <div className="px-20">
+    <div className="border-b border-gray9 pb-20 px-20">
       <ul className="mb-16">
         <li className="flex items-start mb-8">
           <p className="w-80 text-gray4 text-body7">구현</p>
