@@ -156,7 +156,15 @@ function AzureSpeechContextProvider({
         '확인',
         '좋아',
       ]);
+      recognizer.current.canceled = (r, event) => {
+        console.log('canceled sender', r);
+        console.log('canceled event', event);
+      };
 
+      recognizer.current.sessionStopped = (r, event) => {
+        console.log('sessionStopped sender', r);
+        console.log('sessionStopped event', event);
+      };
       recognizer.current.startContinuousRecognitionAsync(
         () => {
           console.log('Recognition started');
