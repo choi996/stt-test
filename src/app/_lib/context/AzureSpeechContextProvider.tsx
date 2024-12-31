@@ -127,13 +127,10 @@ function AzureSpeechContextProvider({
         tokenObj.authToken,
         tokenObj.region,
       );
-      console.log('##SpeechConfig::', speechConfig);
       speechConfig.speechRecognitionLanguage = 'ko-KR';
 
       const audioConfig = AudioConfig.fromDefaultMicrophoneInput();
-      console.log('##AudioConfig::', audioConfig);
       recognizer.current = new SpeechRecognizer(speechConfig, audioConfig);
-      console.log('##Recognizer::', recognizer.current);
       const phraseListGrammar = PhraseListGrammar.fromRecognizer(
         recognizer.current,
       );
@@ -160,7 +157,14 @@ function AzureSpeechContextProvider({
         '좋아',
       ]);
 
-      recognizer.current.startContinuousRecognitionAsync();
+      recognizer.current.startContinuousRecognitionAsync(
+        () => {
+          console.log('Recognition started');
+        },
+        (err) => {
+          console.error('Error starting recognition:', err);
+        },
+      );
 
       // recognizer.current.recognizing = (r, event) => {};
       recognizer.current.recognized = (r, event) => {
