@@ -64,7 +64,6 @@ export function bufferToWave(abuffer: AudioBuffer): Blob {
   const buffer = new ArrayBuffer(length);
   const view = new DataView(buffer);
 
-  let offset = 0;
   let pos = 0;
 
   // Write WAV header
