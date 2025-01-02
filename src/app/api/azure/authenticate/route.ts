@@ -19,7 +19,6 @@ export async function GET() {
       headers,
     );
 
-    console.log('###########GET', speechKey, speechRegion, tokenResponse);
     return NextResponse.json(
       { token: tokenResponse.data, region: speechRegion },
       {

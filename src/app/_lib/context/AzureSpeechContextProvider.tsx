@@ -159,6 +159,8 @@ function AzureSpeechContextProvider({
       recognizer.current.canceled = (r, event) => {
         console.log('canceled sender', r);
         console.log('canceled event', event);
+        setAzureSpeechState(AzureSpeechStateType.READY);
+        recognizer.current?.stopContinuousRecognitionAsync();
       };
 
       recognizer.current.sessionStopped = (r, event) => {
