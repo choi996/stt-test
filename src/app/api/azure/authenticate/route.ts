@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { NextResponse } from 'next/server';
 
+export const revalidate = 0;
+
 export async function GET() {
   const speechKey = process.env.AZURE_SPEECH_KEY;
   const speechRegion = process.env.AZURE_SPEECH_REGION;
