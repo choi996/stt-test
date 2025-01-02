@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
 
-import { getAzureSpeechToken } from '@/app/_actions/Azure/actions';
 import { createContext, ReactNode, useContext, useRef, useState } from 'react';
 import {
   AudioConfig,
@@ -10,6 +9,7 @@ import {
   SpeechRecognizer,
 } from 'microsoft-cognitiveservices-speech-sdk';
 import { bufferToWave } from '../utils/voice';
+import axios from 'axios';
 
 export enum AzureSpeechStateType {
   READY,
@@ -113,7 +113,9 @@ function AzureSpeechContextProvider({
 
   const startTranscript = async () => {
     try {
-      const tokenObj = await getAzureSpeechToken();
+      const tokenObj = await axios.get<{ token: string; region: string }>(
+        '/api/azure/authenticate',
+      );
 
       if (!tokenObj) {
         alert('There was an error authorizing your speech key.');
@@ -124,8 +126,8 @@ function AzureSpeechContextProvider({
       setAzureSpeechState(AzureSpeechStateType.CONNECTING);
 
       const speechConfig = SpeechConfig.fromAuthorizationToken(
-        tokenObj.authToken,
-        tokenObj.region,
+        tokenObj.data.token,
+        tokenObj.data.region,
       );
       speechConfig.speechRecognitionLanguage = 'ko-KR';
 
