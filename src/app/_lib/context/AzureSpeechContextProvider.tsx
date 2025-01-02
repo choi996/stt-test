@@ -117,6 +117,7 @@ function AzureSpeechContextProvider({
         '/api/azure/authenticate',
       );
 
+      console.log('#####tokenObj', tokenObj.data);
       if (!tokenObj) {
         alert('There was an error authorizing your speech key.');
         return;
