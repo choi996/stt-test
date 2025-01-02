@@ -129,6 +129,7 @@ function AzureSpeechContextProvider({
         tokenObj.data.token,
         tokenObj.data.region,
       );
+
       speechConfig.speechRecognitionLanguage = 'ko-KR';
 
       const audioConfig = AudioConfig.fromDefaultMicrophoneInput();
@@ -163,12 +164,9 @@ function AzureSpeechContextProvider({
         console.log('canceled event', event);
         setAzureSpeechState(AzureSpeechStateType.READY);
         recognizer.current?.stopContinuousRecognitionAsync();
+        alert(event.errorDetails);
       };
 
-      recognizer.current.sessionStopped = (r, event) => {
-        console.log('sessionStopped sender', r);
-        console.log('sessionStopped event', event);
-      };
       recognizer.current.startContinuousRecognitionAsync(
         () => {
           console.log('Recognition started');
