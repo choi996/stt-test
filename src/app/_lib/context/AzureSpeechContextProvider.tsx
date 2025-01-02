@@ -136,7 +136,7 @@ function AzureSpeechContextProvider({
       );
 
       phraseListGrammar.addPhrases([
-        '엔진오일',
+        '엔진오일 양호',
         '배터리',
         '양호',
         'km',
