@@ -113,12 +113,15 @@ function AzureSpeechContextProvider({
 
   const startTranscript = async () => {
     try {
-      const tokenObj = await axios.get<{ token: string; region: string }>(
-        '/api/azure/authenticate',
-      );
+      const tokenObj = await fetch('/api/azure/authenticate', {
+        cache: 'no-store',
+      });
 
-      console.log('#####tokenObj', tokenObj.data);
-      if (!tokenObj) {
+      const res = await tokenObj.json();
+
+      console.log('token', res);
+
+      if (!res) {
         alert('There was an error authorizing your speech key.');
         return;
       }
@@ -127,10 +130,9 @@ function AzureSpeechContextProvider({
       setAzureSpeechState(AzureSpeechStateType.CONNECTING);
 
       const speechConfig = SpeechConfig.fromAuthorizationToken(
-        tokenObj.data.token,
-        tokenObj.data.region,
+        res.token,
+        res.region,
       );
-
       speechConfig.speechRecognitionLanguage = 'ko-KR';
 
       const audioConfig = AudioConfig.fromDefaultMicrophoneInput();
