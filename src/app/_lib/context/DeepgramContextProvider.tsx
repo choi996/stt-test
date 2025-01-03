@@ -49,13 +49,6 @@ const DeepgramContextProvider: FunctionComponent<
     LiveConnectionState.CLOSED,
   );
 
-  /**
-   * Connects to the Deepgram speech recognition service and sets up a live transcription session.
-   *
-   * @param options - The configuration options for the live transcription session.
-   * @param endpoint - The optional endpoint URL for the Deepgram service.
-   * @returns A Promise that resolves when the connection is established.
-   */
   const connectToDeepgram = async (options: LiveSchema, endpoint?: string) => {
     setConnectionState(LiveConnectionState.CONNECTING);
     const key = await getApiKey();

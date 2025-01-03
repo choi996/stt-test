@@ -7,3 +7,7 @@ export const debounce = (func: () => void, wait = 500) => {
   }
   timer = setTimeout(func, wait);
 };
+
+export const delay = (ms: number) => {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+};

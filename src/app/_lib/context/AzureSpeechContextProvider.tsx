@@ -9,11 +9,12 @@ import {
   SpeechRecognizer,
 } from 'microsoft-cognitiveservices-speech-sdk';
 import { bufferToWave } from '../utils/voice';
-import axios from 'axios';
+import { getAzureSpeechToken } from '@/app/_actions/Azure/actions';
 
 export enum AzureSpeechStateType {
   READY,
   CONNECTING,
+  CONNECTED,
 }
 
 interface AzureSpeechContextType {
@@ -112,26 +113,22 @@ function AzureSpeechContextProvider({
   };
 
   const startTranscript = async () => {
+    setAzureSpeechState(AzureSpeechStateType.CONNECTING);
     try {
-      const tokenObj = await fetch('/api/azure/authenticate', {
-        cache: 'no-store',
-      });
+      const tokenObj = await getAzureSpeechToken();
 
-      const res = await tokenObj.json();
+      console.log('tokenObj::', tokenObj);
 
-      console.log('token', res);
-
-      if (!res) {
+      if (!tokenObj.authToken) {
         alert('There was an error authorizing your speech key.');
         return;
       }
 
       // await startRecording();
-      setAzureSpeechState(AzureSpeechStateType.CONNECTING);
 
       const speechConfig = SpeechConfig.fromAuthorizationToken(
-        res.token,
-        res.region,
+        tokenObj.authToken,
+        tokenObj.region,
       );
       speechConfig.speechRecognitionLanguage = 'ko-KR';
 
@@ -173,6 +170,7 @@ function AzureSpeechContextProvider({
       recognizer.current.startContinuousRecognitionAsync(
         () => {
           console.log('Recognition started');
+          setAzureSpeechState(AzureSpeechStateType.CONNECTED);
         },
         (err) => {
           console.error('Error starting recognition:', err);

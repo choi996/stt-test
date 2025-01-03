@@ -40,7 +40,7 @@ export default function GoogleCloud() {
       <Button
         label="start"
         size={32}
-        disabled={googleCloudState === GoogleCloudStateType.CONNECTING}
+        disabled={googleCloudState === GoogleCloudStateType.CONNECTED}
         onClick={setupSocket}
       />
       <Button

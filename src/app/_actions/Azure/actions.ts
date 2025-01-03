@@ -27,7 +27,7 @@ export async function getAzureSpeechToken() {
       const token = data.token;
       const region = data.region;
       cookieStore.set('speech-token', region + ':' + token, {
-        maxAge: 540,
+        maxAge: 60 * 9,
         path: '/',
       });
 

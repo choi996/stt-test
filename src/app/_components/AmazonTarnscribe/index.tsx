@@ -36,9 +36,7 @@ export default function AmazonTranscribe() {
       <Button
         label="start"
         size={32}
-        disabled={
-          amazonTranscribeState === AmazonTranscribeStateType.CONNECTING
-        }
+        disabled={amazonTranscribeState === AmazonTranscribeStateType.CONNECTED}
         onClick={setupSocket}
       />
       <Button

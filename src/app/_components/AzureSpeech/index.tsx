@@ -3,6 +3,7 @@ import {
   useAzureSpeech,
 } from '@/app/_lib/context/AzureSpeechContextProvider';
 import Button from '../Button';
+import Loading from '../Loading';
 
 export default function AzureSpeech() {
   const { transcript, startTranscript, azureSpeechState, reset } =
@@ -34,7 +35,7 @@ export default function AzureSpeech() {
       <Button
         label="start"
         size={32}
-        disabled={azureSpeechState === AzureSpeechStateType.CONNECTING}
+        disabled={azureSpeechState === AzureSpeechStateType.CONNECTED}
         onClick={startTranscript}
       />
       <Button
@@ -49,6 +50,10 @@ export default function AzureSpeech() {
         <strong>Transcript: </strong>
         {transcript}
       </p>
+      <Loading
+        isVisible={azureSpeechState === AzureSpeechStateType.CONNECTING}
+        text="Connecting AzureSpeechAI..."
+      />
     </div>
   );
 }

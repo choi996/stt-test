@@ -45,9 +45,9 @@ export default function SttTestPage() {
   const isOn =
     listening ||
     microphone?.state === 'recording' ||
-    googleCloudState === GoogleCloudStateType.CONNECTING ||
-    amazonTranscribeState === AmazonTranscribeStateType.CONNECTING ||
-    azureSpeechState === AzureSpeechStateType.CONNECTING;
+    googleCloudState === GoogleCloudStateType.CONNECTED ||
+    amazonTranscribeState === AmazonTranscribeStateType.CONNECTED ||
+    azureSpeechState === AzureSpeechStateType.CONNECTED;
 
   return (
     <>

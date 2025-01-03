@@ -6,6 +6,7 @@ import { io, Socket } from 'socket.io-client';
 export enum AmazonTranscribeStateType {
   READY,
   CONNECTING,
+  CONNECTED,
 }
 
 interface AmazonTranscribeContextType {
@@ -58,6 +59,7 @@ function AmazonTranscribeContextProvider({
     socket.current = ioSocket;
 
     ioSocket.on('connect', async () => {
+      setAmazonTranscribeState(AmazonTranscribeStateType.CONNECTED);
       console.log('socket connected');
       try {
         const stream = await navigator.mediaDevices.getUserMedia({

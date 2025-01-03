@@ -6,6 +6,7 @@ import { io, Socket } from 'socket.io-client';
 export enum GoogleCloudStateType {
   READY,
   CONNECTING,
+  CONNECTED,
 }
 
 interface GoogleCloudContextType {
@@ -56,6 +57,7 @@ function GoogleCloudContextProvider({
 
     ioSocket.on('connect', async () => {
       console.log('socket connected');
+      setGoogleCloudState(GoogleCloudStateType.CONNECTED);
       try {
         const sampleRate = 16000;
         const chunkRate = 100;
